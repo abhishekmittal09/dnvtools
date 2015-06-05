@@ -1,0 +1,12 @@
+The user should be able to choose the projects for checking the dependancies. For eg. let there be 10 projects on which the parsar is run, this information will be added to the database and now the user will be able to choose projects to find the dependancy that exists in them.
+
+	This can can multiple use cases.
+
+	1. The graph would be mostly tree based graph and can have loops.
+	2. The graph could also be a forest with multiple trees.
+	3. The end nodes would be the names of the modules or projects which are not dependand on anything or info regarding their depandancy is not available.
+
+Finding cycles, especially new cycles as they come up, is one key part here.
+
+Version skew can be recoganized as well by storing the name of the depandancy and it's version separately.
+
