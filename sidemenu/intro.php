@@ -1,5 +1,5 @@
         <div class="header">
-            <h1>Depandancy and Version Tracking Tools</h1>
+            <h1>Dependancy and Version Tracking Tools</h1>
             <h2>The following are some simple use cases of the tool</h2>
         </div>
 

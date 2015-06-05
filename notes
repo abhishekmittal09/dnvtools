@@ -4,9 +4,9 @@ The user should be able to choose the projects for checking the dependancies. Fo
 
 	1. The graph would be mostly tree based graph and can have loops.
 	2. The graph could also be a forest with multiple trees.
-	3. The end nodes would be the names of the modules or projects which are not dependand on anything or info regarding their depandancy is not available.
+	3. The end nodes would be the names of the modules or projects which are not dependand on anything or info regarding their dependancy is not available.
 
 Finding cycles, especially new cycles as they come up, is one key part here.
 
-Version skew can be recoganized as well by storing the name of the depandancy and it's version separately.
+Version skew can be recoganized as well by storing the name of the dependancy and it's version separately.
 

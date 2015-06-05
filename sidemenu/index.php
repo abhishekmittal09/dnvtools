@@ -43,7 +43,7 @@ extract($_GET);
             <a class="pure-menu-heading" href="<?php echo $pages["intro"]; ?>">Tools</a>
 
             <ul class="pure-menu-list">
-                <li class="pure-menu-item"><a href="<?php echo $pages["depandancy"]; ?>" class="pure-menu-link">Depandancy<br>Graph</a></li>
+                <li class="pure-menu-item"><a href="<?php echo $pages["dependancy"]; ?>" class="pure-menu-link">Dependancy<br>Graph</a></li>
                 <li class="pure-menu-item"><a href="<?php echo $pages["version_skew_report"]; ?>" class="pure-menu-link">Version Skew</a></li>
                 <li class="pure-menu-item"><a href="<?php echo $pages["database"]; ?>" class="pure-menu-link">Current<br>Database</a></li>
             </ul>
@@ -52,7 +52,7 @@ extract($_GET);
 
     <div id="main">
         <?php
-            if($page==="version_skew_report" || $page==="database" || $page==="depandancy"){
+            if($page==="version_skew_report" || $page==="database" || $page==="dependancy"){
                 include($page_locs[$page]);
             } else {
                 include($page_locs["intro"]);
