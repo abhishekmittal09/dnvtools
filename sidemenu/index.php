@@ -196,7 +196,6 @@ $( document ).ready(function() {
     manipulation: {
 
       addNode: function (data, callback) {
-        alert("hainji");
         // filling in the popup DOM elements
         document.getElementById('operation').innerHTML = "Add Node";
         document.getElementById('node-id').value = data.id;
