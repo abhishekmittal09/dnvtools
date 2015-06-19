@@ -41,7 +41,7 @@ $demo_link = $SERVER."sidemenu/index.php";
 <body>
 <div class="header">
     <div class="home-menu pure-menu pure-menu-horizontal pure-menu-fixed">
-        <a class="pure-menu-heading" href="">Dependancy and Version Tracking Tools</a>
+        <a class="pure-menu-heading" href="">Dependency and Version Tracking Tools</a>
 
         <ul class="pure-menu-list">
             <li class="pure-menu-item"><a href="https://wiki.opendaylight.org/view/InternProjects:Main#Dependency_and_Version_Tracking_Tools" class="pure-menu-link">Aim of Project</a></li>
@@ -55,7 +55,7 @@ $demo_link = $SERVER."sidemenu/index.php";
     <div class="splash">
         <h1 class="splash-head">Go to Tools</h1>
         <p class="splash-subhead">
-            Welcome to Dependancy and Version Tools webpage. Here you can track which projects/modules depends on what and what version and then visualize the same.
+            Welcome to Dependency and Version Tools webpage. Here you can track which projects/modules depends on what and what version and then visualize the same.
         </p>
         <p>
             <a href="<?php echo $demo_link; ?>" class="pure-button pure-button-primary">Get Started</a>
