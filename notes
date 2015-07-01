@@ -10,3 +10,24 @@ Finding cycles, especially new cycles as they come up, is one key part here.
 
 Version skew can be recoganized as well by storing the name of the dependency and it's version separately.
 
+
+
+***************************** Questions to ask ***************************** 
+
+1. How should the input be taken for the location of the autorelease project?
+
+- The best approach would be take input for the location and then run the script.
+
+2. 
+
+
+***************************** How parsing is done ***************************** 
+
+After discussion the following parsing mechanism has been concluded :-
+
+1. Generate effective pom files using command "mvn help:effective-pom"
+
+2. Find out dependencies under the <plugins> (found under the <pluginmanagement> tag, found under the <build> tag) and direct <dependencies>, the dependencies under <dependencymanagement> has to be ingnored
+
+3. Tracking is done only for dependencies found under the <plugins> tag in <pluginManagement> tag, <dependencies> tag under the <project> tag, <parent> tag
+

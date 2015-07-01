@@ -13,16 +13,31 @@ for pom.xml files which are parsed and dependency information is updated
 
 '''
 
-* Verify if the directory exists, report error on fail
+TODO: Verify if the directory link, report error on fail
+	  Verify if the directory exists, report error on fail
+	  Add checksum for checking if download has been successful
 
 '''
 
 # Import the os module, for the os.walk function
+import sys
 import os
 import json
 import re
 import xml.etree.ElementTree as ET
 from StringIO import StringIO
+
+'''
+
+Makes a System Call
+
+'''
+
+def systemCallMvnEffectivePom( directoryLocation ):
+
+	# TODO : uncomment this command
+	os.system( 'mvn -f ' + directoryLocation + ' help:effective-pom -Doutput=epom.xml' )
+	return
 
 '''
 
@@ -38,7 +53,7 @@ def removeNameSpace(it):
 
 '''
 
-removes #set from pom file
+removes #set tags (if any) from pom file
 
 '''
 
@@ -52,12 +67,14 @@ def removeSetHash(content):
 
 '''
 
-Init XML
+Init XML file for parsing, returns the head tag of the XML file
 
 '''
 
 def initXML(dirName, filename):
+
 	xml=''
+
 	with open (dirName+'/'+filename, "r") as xmlFile:
 	    xml=xmlFile.read().replace('\n', '')
 
@@ -73,9 +90,10 @@ def initXML(dirName, filename):
 
 '''
 
-Returns the dictionary groupId+':'+artifactId+':'+version
+Returns the dictionary {groupId : ,artifactId : ,version :}
 
 '''
+
 def getUniqueId(dirName, filename):
 
 	root = initXML(dirName, filename)
@@ -114,7 +132,7 @@ def getUniqueId(dirName, filename):
 
 '''
 
-returns the names of the major modules/projects in the pom file
+Returns the names of the major modules in the pom file found under the first <modules> tag of pom file  
 TODO : Check for case sensitive information
 
 '''
@@ -143,7 +161,7 @@ def getModuleNames(dirName, filename):
 
 '''
 
-returns the names of the major modules/projects dependency in the pom file
+returns the names of the major modules dependency in the pom file under the first <dependencies> tag of pom file
 TODO : Check for case sensitive information
 
 '''
@@ -153,43 +171,78 @@ def getDependencyNames(dirName, filename):
 
 	dependency=[]
 
-	#makes modules as the root tag
+	dependencyTag = None
+	# find dependencies from the dependencies tag
 	if root.tag == "dependencies":
-		pass
+		dependencyTag = root
 	else:
-		root = root.find('dependencies')
+		dependencyTag = root.find('dependencies')
 
-	if root is not None:
+	if dependencyTag is not None:
+		for child in dependencyTag:
+			if child.tag == "dependency":
+				dependencyInfo = {}
+				dependencyInfo["groupId"]=""	
+				dependencyInfo["artifactId"]=""	
+				dependencyInfo["version"]=""	
+				dependencyInfo["scope"]=""	
+				for subchild in child:
+					if subchild.tag == "groupId":
+						dependencyInfo["groupId"]=subchild.text
+
+					if subchild.tag == "artifactId":
+						dependencyInfo["artifactId"]=subchild.text
+					
+					if subchild.tag == "version":
+						dependencyInfo["version"]=subchild.text
+
+					if subchild.tag == "scope":
+						dependencyInfo["scope"]=subchild.text
+
+				dependency.append(dependencyInfo)
+
+	# find dependencies from the pluginmanagement tag
+	buildTag = None
+	if root.tag == "build":
+		buildTag = root
+	else:
+		buildTag = root.find('build')
+
+	if buildTag is not None:
 		pass
 	else :
 		return dependency
 
-	for child in root:
-		if child.tag == "dependency":
-			dependencyInfo = {}
-			dependencyInfo["groupId"]=""	
-			dependencyInfo["artifactId"]=""	
-			dependencyInfo["version"]=""	
-			dependencyInfo["scope"]=""	
-			for subchild in child:
-				if subchild.tag == "groupId":
-					dependencyInfo["groupId"]=subchild.text
+	for pluginManagementTags in buildTag.findall('pluginManagement'):
+		for pluginsTags in pluginManagementTags.findall('plugins'):
+			for pluginTags in pluginsTags.findall('plugin'):
+				for dependenciesTags in pluginTags.findall('dependencies'):
+					for child in dependenciesTags:
+						if child.tag == "dependency":
+							dependencyInfo = {}
+							dependencyInfo["groupId"]=""	
+							dependencyInfo["artifactId"]=""	
+							dependencyInfo["version"]=""	
+							dependencyInfo["scope"]=""	
+							for subchild in child:
+								if subchild.tag == "groupId":
+									dependencyInfo["groupId"]=subchild.text
 
-				if subchild.tag == "artifactId":
-					dependencyInfo["artifactId"]=subchild.text
-				
-				if subchild.tag == "version":
-					dependencyInfo["version"]=subchild.text
+								if subchild.tag == "artifactId":
+									dependencyInfo["artifactId"]=subchild.text
+								
+								if subchild.tag == "version":
+									dependencyInfo["version"]=subchild.text
 
-				if subchild.tag == "scope":
-					dependencyInfo["scope"]=subchild.text
+								if subchild.tag == "scope":
+									dependencyInfo["scope"]=subchild.text
+							dependency.append(dependencyInfo)
 
-			dependency.append(dependencyInfo)
 	return dependency
 
 '''
 
-returns the names of the major modules/projects parents in the pom file
+returns the names of the major modules/projects parents in the pom file under the first <parent> tag of the pom file
 TODO : Check for case sensitive information
 
 '''
@@ -209,12 +262,10 @@ def getParentNames(dirName, filename):
 		pass
 	else :
 		return parent
-
+	
+	parentInfo = {}
+	
 	for child in root:
-		parentInfo = {}
-		parentInfo["groupId"]=""
-		parentInfo["artifactId"]=""
-		parentInfo["version"]=""
 		if child.tag == 'groupId':
 			parentInfo["groupId"] = child.text
 		if child.tag == 'artifactId':
@@ -222,7 +273,7 @@ def getParentNames(dirName, filename):
 		if child.tag == 'version':
 			parentInfo["version"] = child.text
 	
-		parent.append(parentInfo)
+	parent.append(parentInfo)
 
 	return parent
 
@@ -261,18 +312,26 @@ def recursePom(directoryName):
 	for dirName, subdirList, fileList in os.walk(directoryName):
 
 		#skipping all src and target directories
-	    if dirName=="src" or dirName=="target" or dirName==directoryName:
-	    	continue;
+	    # if dirName=="src" or dirName=="target" or dirName==directoryName:
+	    # 	continue;
 
 	    for fname in fileList:
 
 	        if fname == 'pom.xml' :
 
-	        	totalPoms = totalPoms + 1
+	        	systemCallMvnEffectivePom( dirName )
 
 	        	# print dirName+'/'+fname
+	        	fname = 'epom.xml'
+
+	        	if os.path.isfile( dirName + '/' + fname ) :
+	        		pass
+	        	else :
+	        		continue
+
+	        	totalPoms = totalPoms + 1
 	        	pomExtractedInfo = {}
-	        	pomExtractedInfo['path'] = dirName+'/'+'pom.xml'
+	        	pomExtractedInfo['path'] = dirName + '/' + fname
 	        	pomExtractedInfo['name'] = getPomName(dirName, fname)
 	        	pomExtractedInfo['id'] = getUniqueId(dirName, fname)
 	        	pomExtractedInfo['modules'] = getModuleNames(dirName, fname)
@@ -293,49 +352,6 @@ Tells whether the pom files exists or not
 def checkPomfileExistence(fname):
 	return os.path.isfile(fname) 
 
-#DIR_LOC = raw_input('Please enter the path of the autorelease folder: ')
-DIR_LOC = '/var/www/html/gsoc/autorelease'
-
-# stores all the dependency information in the dictionary
-dependencies = {}
-dependencies['path'] = DIR_LOC
-dependencies['id'] = getUniqueId(DIR_LOC, "pom.xml")
-dependencies['name'] = getPomName(DIR_LOC, "pom.xml")
-dependencies['dependencies'] = getDependencyNames(DIR_LOC, "pom.xml")
-dependencies['parent'] = getParentNames(DIR_LOC, "pom.xml")
-dependencies['modules'] = getModuleNames(DIR_LOC, "pom.xml")
-dependencies['moduleInfo'] = {}
-
-actualModules = []
-
-totalPoms = 0
-
-for module in dependencies['modules']:
-
-	moduleDir = DIR_LOC+'/'+module
-	
-	if checkPomfileExistence(moduleDir+"/pom.xml") :
-		pass
-	else :
-		continue
-	actualModules.append(module)
-	dependencies['moduleInfo'][module] = {}
-	dependencies['moduleInfo'][module]['id'] = getUniqueId(moduleDir, "pom.xml")
-	dependencies['moduleInfo'][module]['name'] = getPomName(moduleDir, "pom.xml")
-	dependencies['moduleInfo'][module]['modules'] = getModuleNames(moduleDir, "pom.xml")
-	dependencies['moduleInfo'][module]['dependencies'] = getDependencyNames(moduleDir, "pom.xml")
-	dependencies['moduleInfo'][module]['parent'] = getParentNames(moduleDir, "pom.xml")
-	#array of all pom files information in the project
-	dependencies['moduleInfo'][module]["recursePomInfo"] = recursePom(moduleDir)
-	print totalPoms
-	# print dependencies
-
-# print dependencies
-dependencies['modules'] = actualModules
-
-print totalPoms
-
-
 # def removeSingleQuote(data):
 # 	return data.replace("'", "")
 
@@ -346,24 +362,53 @@ def getID(node):
 def filterInfo(name):
 	return re.sub("org.opendaylight.", "", name)
 
-def getDependencyID(node):
+def getDependencyGroupID(node):
 	# return removeSingleQuote(node['groupId'] + ':' + node['artifactId'] + ':' + node['version'])
 	# return node['groupId'] + ':' + node['artifactId'] + ':' + node['version']
-	return filterInfo( node['groupId'] )
+	return node['groupId']
+
+def getDependencyVersion(node):
+	return node['version']
+
+
+'''
+
+Checks whether a module is valid opendaylight module or not
+
+'''
+
+def checkValidModule( moduleName ):
+
+	if re.search( "^org\.opendaylight", moduleName ) :
+		return True
+	else :
+		return False
 
 '''
 
 Return the project in which the module is found
 
+This can be done in multiple ways : Either find the mapping from a map created after parsing the pom files
+									find the project name after filtering information from the module name
+
 '''
 
 def findProjectOfModule(projectMapping, module):
-	for key in projectMapping.keys():
-		if module in projectMapping[key] :
-			return key
-		if module == key :
-			return key
-	return "unknown"
+
+	# Method 1
+	# for key in projectMapping.keys():
+	# 	if module in projectMapping[key] :
+	# 		return key
+	# 	if module == key :
+	# 		return key
+	# return "unknown"
+
+	# Method 2
+
+	module = re.sub('org.opendaylight.', '', module)
+	module = re.sub('\..*$', '', module)
+
+	return module
 
 '''
 
@@ -379,6 +424,116 @@ def getLabel(node):
 	else:
 		return getID(node)
 
+
+def helperExtendDependencyInformation(anticipatedNodes, anticipatedEdges, distinctIdLabelFromEdges, dependency, project):
+
+	if checkValidModule( getDependencyGroupID( dependency ) ) :
+		pass
+	else :
+		return
+
+	distinctIdLabelFromEdges.append( project )
+	distinctIdLabelFromEdges.append( findProjectOfModule( projectMappedToAllModules, getDependencyGroupID( dependency ) ) )
+	
+	anticipatedEdges.append({
+		'from': project, 
+		'to': findProjectOfModule( projectMappedToAllModules, getDependencyGroupID( dependency ) ),
+		'arrows': 'to'
+	})
+
+	return
+
+def extendDependencyInformation(anticipatedNodes, anticipatedEdges, distinctIdLabelFromEdges, submodule, project):
+
+	for dependency in submodule['dependencies'] :
+		helperExtendDependencyInformation(anticipatedNodes, anticipatedEdges, distinctIdLabelFromEdges, dependency, project)
+
+	for dependency in submodule['parent'] :
+		helperExtendDependencyInformation(anticipatedNodes, anticipatedEdges, distinctIdLabelFromEdges, dependency, project)
+		
+	return
+
+
+def extendModulesMappedToProjects(dependency, modulesMappedToProjects, submodule, project):
+	
+	moduleName = '(' + dependency['groupId'] + ", " + dependency['artifactId'] + ')'
+	pomFile = submodule['path']
+	dependencyVersion = getDependencyVersion( dependency )
+	dependencyProject = project # the project that's dependant on the concerned module
+	if moduleName in modulesMappedToProjects.keys():
+		if dependencyProject in modulesMappedToProjects[moduleName].keys():
+			modulesMappedToProjects[moduleName][dependencyProject].append( (dependencyVersion, pomFile) )
+		else:
+			modulesMappedToProjects[moduleName][dependencyProject] = []
+			modulesMappedToProjects[moduleName][dependencyProject].append( (dependencyVersion, pomFile) )
+	else:
+		modulesMappedToProjects[moduleName] = {}
+		modulesMappedToProjects[moduleName][dependencyProject] = []
+		modulesMappedToProjects[moduleName][dependencyProject].append( (dependencyVersion, pomFile) )
+
+	return
+
+
+DIR_LOC = sys.argv[1]
+# DIR_LOC = '/var/www/html/gsoc/testrelease'
+
+systemCallMvnEffectivePom( DIR_LOC )
+
+# stores all the dependency information in the dictionary
+
+# TODO change it to epom
+rootPomFile = "epom.xml"
+dependencies = {}
+dependencies['path'] = DIR_LOC + '/' + rootPomFile
+dependencies['id'] = getUniqueId(DIR_LOC, rootPomFile)
+dependencies['name'] = getPomName(DIR_LOC, rootPomFile)
+dependencies['dependencies'] = getDependencyNames(DIR_LOC, rootPomFile)
+dependencies['parent'] = getParentNames(DIR_LOC, rootPomFile)
+dependencies['modules'] = getModuleNames(DIR_LOC, rootPomFile)
+dependencies['moduleInfo'] = {}
+
+actualModules = []
+
+totalPoms = 1
+
+for module in dependencies['modules']:
+
+	moduleDir = DIR_LOC+'/'+module
+	
+	# TODO change it to pom
+	rootPomFile = "pom.xml"
+
+	if checkPomfileExistence(moduleDir + '/' + rootPomFile) :
+		pass
+	else :
+		continue
+
+	systemCallMvnEffectivePom( moduleDir )
+
+	rootPomFile = "epom.xml"
+
+	if checkPomfileExistence(moduleDir + '/' + rootPomFile) :
+		pass
+	else :
+		continue
+
+	totalPoms = totalPoms + 1
+	actualModules.append( module )
+	dependencies['moduleInfo'][module] = {}
+	dependencies['moduleInfo'][module]['id'] = getUniqueId( moduleDir, rootPomFile )
+	dependencies['moduleInfo'][module]['name'] = getPomName( moduleDir, rootPomFile )
+	dependencies['moduleInfo'][module]['modules'] = getModuleNames( moduleDir, rootPomFile )
+	dependencies['moduleInfo'][module]['dependencies'] = getDependencyNames( moduleDir, rootPomFile )
+	dependencies['moduleInfo'][module]['parent'] = getParentNames( moduleDir, rootPomFile )
+	# array of all pom files information in the project
+	dependencies['moduleInfo'][module]["recursePomInfo"] = recursePom( moduleDir )
+	print totalPoms
+
+dependencies['modules'] = actualModules
+
+print totalPoms
+
+
 projectMappedToAllModules = {}
 
 for project in actualModules :
@@ -389,18 +544,6 @@ for project in actualModules :
 		allModules.append(getID(data))
 	projectMappedToAllModules[project] = allModules
 
-
-projectMapping = 'var projectMapping = [\n'
-
-for key in projectMappedToAllModules.keys() :
-	projectMapping = projectMapping + '{projectName:\'' + key + '\','
-	projectMapping = projectMapping + 'modules: ['
-	for info in projectMappedToAllModules[key]:
-		projectMapping = projectMapping + '\'' + info + '\','
-	projectMapping = projectMapping[:-1]
-	projectMapping = projectMapping + ']},\n'
-
-projectMapping = projectMapping + '];\n'
 
 # store the distinct module ids and labels
 
@@ -423,43 +566,18 @@ anticipatedNodes = []
 
 distinctIdLabelFromEdges = []
 
-dependencyMappedToProject = []
 
-for module in dependencies['modules'] :
-	# stringEdges = stringEdges + '{'
-	# stringEdges = stringEdges + 'from: \'' + getID(dependencies) + '\','
-	# stringEdges = stringEdges + 'to: \'' + getID(dependencies['moduleInfo'][module]) + '\''
-	# stringEdges = stringEdges + '},\n'
+extendDependencyInformation(anticipatedNodes, anticipatedEdges, distinctIdLabelFromEdges, dependencies, dependencies['name'])
 
-	for submodule in dependencies['moduleInfo'][module]['recursePomInfo'] :
-		for dependency in submodule['dependencies'] :
-			distinctIdLabelFromEdges.append(findProjectOfModule( projectMappedToAllModules, getID(submodule) ))
-			distinctIdLabelFromEdges.append(findProjectOfModule( projectMappedToAllModules, getDependencyID( dependency ) ))
-			anticipatedEdges.append({
-				# 'from': findProjectOfModule( projectMappedToAllModules, getID(submodule) ), 
-				'from': module, 
-				'to': findProjectOfModule( projectMappedToAllModules, getDependencyID( dependency ) ),
-				'arrows': 'to'
-			})
-			dependencyMappedToProject.append({
-				"dependency" : getDependencyID( dependency ),
-				"project" : findProjectOfModule( projectMappedToAllModules, getDependencyID( dependency ) )
-			})
-		for dependency in submodule['parent'] :
-			distinctIdLabelFromEdges.append(findProjectOfModule( projectMappedToAllModules, getID(submodule) ))
-			distinctIdLabelFromEdges.append(findProjectOfModule( projectMappedToAllModules, getDependencyID( dependency ) ))
-			anticipatedEdges.append({
-				# 'from': findProjectOfModule( projectMappedToAllModules, getID(submodule) ), 
-				'from': module, 
-				'to': findProjectOfModule( projectMappedToAllModules, getDependencyID( dependency ) ),
-				'arrows': 'to'
-			})
-			dependencyMappedToProject.append({
-				"dependency" : getDependencyID( dependency ),
-				"project" : findProjectOfModule( projectMappedToAllModules, getDependencyID( dependency ) )
-			})
+for project in dependencies['modules'] :
+
+	for submodule in dependencies['moduleInfo'][project]['recursePomInfo'] :
+
+		extendDependencyInformation(anticipatedNodes, anticipatedEdges, distinctIdLabelFromEdges, submodule, project)
+
 
 distinctIdLabelFromEdges = set(distinctIdLabelFromEdges)
+
 for idLabel in distinctIdLabelFromEdges :
 	anticipatedNodes.append({
 		'id': idLabel,
@@ -469,9 +587,29 @@ for idLabel in distinctIdLabelFromEdges :
 #set of unique edges
 anticipatedEdges = [dict(t) for t in set([tuple(d.items()) for d in anticipatedEdges])]
 
+modulesMappedToProjects = {}
+
+
+#for parent node
+for dependency in dependencies['dependencies'] :
+	extendModulesMappedToProjects(dependency, modulesMappedToProjects, dependencies, dependencies['name'])
+
+#for root nodes
+for project in dependencies['modules'] :
+
+	for submodule in dependencies['moduleInfo'][project]['recursePomInfo'] :
+
+		for dependency in submodule['dependencies'] :
+			extendModulesMappedToProjects(dependency, modulesMappedToProjects, submodule, project)
+
+		for dependency in submodule['parent'] :
+			extendModulesMappedToProjects(dependency, modulesMappedToProjects, submodule, project)
+
 stringEdges = 'var edges = ' + json.dumps(anticipatedEdges) + '\n'
 
 stringNodes = 'var nodes = '+ json.dumps(anticipatedNodes) + '\n'
+
+stringModulesMappedToProjects = 'var modulesMappedToProjects = ' + json.dumps(modulesMappedToProjects) + '\n'
 
 f = open('../sidemenu/js/data.json', 'w')
 
@@ -479,7 +617,8 @@ f.write(stringNodes)
 
 f.write(stringEdges)
 
-f.write(projectMapping)
+f.write(stringModulesMappedToProjects)
 
-f.write(json.dumps(dependencyMappedToProject))
+# print dependencies
 
+# print modulesMappedToProjects
