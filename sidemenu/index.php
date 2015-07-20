@@ -183,116 +183,120 @@ h4 {
 
 <script type="text/javascript">
 
-function uniqueVersions(list) {
-  var result = [];
-  $.each(list, function(i, e) {
-    if ($.inArray(e, result) == -1) result.push(e);
+$( document ).ready(function() {
+
+  function uniqueVersions(list) {
+    var result = [];
+    $.each(list, function(i, e) {
+      if ($.inArray(e, result) == -1) result.push(e);
+    });
+    return result;
+  }
+
+  var modulesVersionInfo = {}
+
+  $.each(modulesMappedToProjects, function(module, moduleDependencyInfo) {
+
+      var projectVersion = {}
+      $.each(moduleDependencyInfo, function(projectName, versionInfo) {
+          var Versions = []
+          for (var i = versionInfo.length - 1; i >= 0; i--) {
+            Versions.push(versionInfo[i][0]);
+          };
+          Versions = uniqueVersions( Versions );
+          if( Versions.length===1 );
+          else {
+            projectVersion[projectName] = Versions;
+          }
+      });
+
+      // console.log(projectVersion);
+      // console.log(Object.keys(projectVersion).length);
+
+      if(Object.keys(projectVersion).length>0){
+        modulesVersionInfo[module] = projectVersion;
+      }
+
   });
-  return result;
-}
 
-var modulesVersionInfo = {}
+  console.log(modulesVersionInfo);
 
-$.each(modulesMappedToProjects, function(module, moduleDependencyInfo) {
+  var version_skew_info = {
+    "test" : {
+      "project1" : [["ver1"], ["ver2"]],
+      "project2" : [["ver1"], ["ver2"], ["ver3"], ["ver4"]],
+      "project3" : [["ver1"], ["ver2"], ["ver5"], ["ver6"]],
+      "project4" : [["ver1"], ["ver2"]],
+    },
 
-    var projectVersion = {}
-    $.each(moduleDependencyInfo, function(projectName, versionInfo) {
-        var Versions = []
-        for (var i = versionInfo.length - 1; i >= 0; i--) {
-          Versions.push(versionInfo[i][0]);
-        };
-        Versions = uniqueVersions( Versions );
-        if( Versions.length===1 );
-        else {
-          projectVersion[projectName] = Versions;
-        }
-    });
+    "test2" : {
+      "project1" : [["ver1"], ["ver2"]],
+      "project2" : [["ver1"], ["ver2"], ["ver3"], ["ver4"]],
+      "project3" : [["ver1"], ["ver2"], ["ver5"], ["ver6"]],
+      "project4" : [["ver7"], ["ver8"]],
+    },
 
-    // console.log(projectVersion);
-    // console.log(Object.keys(projectVersion).length);
-
-    if(Object.keys(projectVersion).length>0){
-      modulesVersionInfo[module] = projectVersion;
-    }
-
-});
-
-console.log(modulesVersionInfo);
-
-var version_skew_info = {
-  "test" : {
-    "project1" : [["ver1"], ["ver2"]],
-    "project2" : [["ver1"], ["ver2"], ["ver3"], ["ver4"]],
-    "project3" : [["ver1"], ["ver2"], ["ver5"], ["ver6"]],
-    "project4" : [["ver1"], ["ver2"]],
-  },
-
-  "test2" : {
-    "project1" : [["ver1"], ["ver2"]],
-    "project2" : [["ver1"], ["ver2"], ["ver3"], ["ver4"]],
-    "project3" : [["ver1"], ["ver2"], ["ver5"], ["ver6"]],
-    "project4" : [["ver7"], ["ver8"]],
-  },
-
-  "test3" : {
-    "project1" : [["ver1"], ["ver2"]],
-    "project2" : [["ver1"], ["ver2"], ["ver3"], ["ver4"]],
-    "project6" : [["ver1"], ["ver2"]],
-    "project7" : [["ver1"], ["ver2"], ["ver3"], ["ver4"]],
-  },
-};
+    "test3" : {
+      "project1" : [["ver1"], ["ver2"]],
+      "project2" : [["ver1"], ["ver2"], ["ver3"], ["ver4"]],
+      "project6" : [["ver1"], ["ver2"]],
+      "project7" : [["ver1"], ["ver2"], ["ver3"], ["ver4"]],
+    },
+  };
 
 
 
 
-var tableString = "";
+  var tableString = "";
 
-var num = 1;
+  var num = 1;
 
-$.each(modulesVersionInfo, function(module, moduleDependencyInfo) {
+  $.each(modulesVersionInfo, function(module, moduleDependencyInfo) {
 
-    var rowsToSpan = 0;
+      var rowsToSpan = 0;
 
-    $.each(moduleDependencyInfo, function(projectName, versionInfo) {
-        rowsToSpan += versionInfo.length;
-    });
+      $.each(moduleDependencyInfo, function(projectName, versionInfo) {
+          rowsToSpan += versionInfo.length;
+      });
 
-    tableString = "<tr>";
-    tableString += "<td rowspan=\"" + rowsToSpan + "\">" + num + "</td>";
-    tableString += "<td rowspan=\"" + rowsToSpan + "\">" + module + "</td>";
-    num++;
+      tableString = "<tr>";
+      tableString += "<td rowspan=\"" + rowsToSpan + "\">" + num + "</td>";
+      tableString += "<td rowspan=\"" + rowsToSpan + "\">" + module + "</td>";
+      num++;
 
-    var once = 1;
-    $.each(moduleDependencyInfo, function(projectName, versionInfo) {
+      var once = 1;
+      $.each(moduleDependencyInfo, function(projectName, versionInfo) {
 
-        if (once===1) {
-          AllProjects = "<td rowspan=\""+ versionInfo.length +"\">" + projectName + "</td>";
-        } else{
-          AllProjects = "<tr><td rowspan=\""+ versionInfo.length +"\">" + projectName + "</td>";          
-        }
-        tableString += AllProjects;
-        for (var i = versionInfo.length - 1; i >= 0; i--) {
-          //detailed version info
-//          for (var j = versionInfo[i].length - 1; j >= 0; j--) {
-            console.log(versionInfo[i]);
-            if(i==versionInfo.length-1 && once===1){
-              AllVersions = "<td>" + versionInfo[i] + "</td>";
-              AllVersions += "</tr>";//ending the very first row
-              once=0;
-            } else if (i==versionInfo.length-1){
-              AllVersions = "<td>" + versionInfo[i] + "</td></tr>";              
-            } else {
-              AllVersions = "<tr><td>" + versionInfo[i] + "</td></tr>";              
-            }
-            tableString += AllVersions;
-//          };
-        };
+          if (once===1) {
+            AllProjects = "<td rowspan=\""+ versionInfo.length +"\">" + projectName + "</td>";
+          } else{
+            AllProjects = "<tr><td rowspan=\""+ versionInfo.length +"\">" + projectName + "</td>";          
+          }
+          tableString += AllProjects;
+          for (var i = versionInfo.length - 1; i >= 0; i--) {
+            //detailed version info
+  //          for (var j = versionInfo[i].length - 1; j >= 0; j--) {
+              console.log(versionInfo[i]);
+              if(i==versionInfo.length-1 && once===1){
+                AllVersions = "<td>" + versionInfo[i] + "</td>";
+                AllVersions += "</tr>";//ending the very first row
+                once=0;
+              } else if (i==versionInfo.length-1){
+                AllVersions = "<td>" + versionInfo[i] + "</td></tr>";              
+              } else {
+                AllVersions = "<tr><td>" + versionInfo[i] + "</td></tr>";              
+              }
+              tableString += AllVersions;
+  //          };
+          };
 
-    });
+      });
 
 
-    // tableString += "</tr>";
-    $('#version_skew_table > tbody:last-child').append(tableString);
+      // tableString += "</tr>";
+      $('#version_skew_table > tbody:last-child').append(tableString);
+
+  });
 
 });
 
