@@ -1,12 +1,3 @@
-<?php
-
-include('../pages.php');
-
-$page="intro";
-extract($_GET);
-
-?>
-
 <!doctype html>
 <html lang="en">
 <head>
@@ -26,6 +17,11 @@ extract($_GET);
 <!--[if gt IE 8]><!-->
     <link rel="stylesheet" href="css/layouts/side-menu.css">
 <!--<![endif]-->
+
+
+<script type="text/javascript" src="./js/data.json"></script>
+
+<script src="js/jquery.js"></script>
   
 <script type="text/javascript" src="./dist/vis.js"></script>
 <link href="./dist/vis.css" rel="stylesheet" type="text/css" />
@@ -98,60 +94,211 @@ h4 {
 
     <div id="menu">
         <div class="pure-menu">
-            <a class="pure-menu-heading" href="<?php echo $pages["intro"]; ?>">Tools</a>
+            <a class="pure-menu-heading" href="#">Tools</a>
 
             <ul class="pure-menu-list">
-                <li class="pure-menu-item"><a href="#dependency" class="pure-menu-link">Dependency<br>Graph</a></li>
-                <li class="pure-menu-item"><a href="<?php echo $pages["version_skew_report"]; ?>" class="pure-menu-link">Version Skew</a></li>
-                <li class="pure-menu-item"><a href="<?php echo $pages["database"]; ?>" class="pure-menu-link">Current<br>Database</a></li>
+                <li class="pure-menu-item"><a href="#dependency" class="pure-menu-link" onclick="changeDiv('dependency')">Dependency<br>Graph</a></li>
+                <li class="pure-menu-item"><a href="#version_skew" class="pure-menu-link" onclick="changeDiv('version_skew')">Version Skew</a></li>
             </ul>
         </div>
     </div>
 
     <div id="main">
-        <div id="dependency" class="header">
-            <h1>Dependency Graph</h1>
-            <h2>Visualization via Dependency Graphs for various projects</h2>
+      <div class="singleElementDisplay" id="dependency" style="display:none">
+        <div class="header">
+          <h1>Dependency Graph</h1>
+          <h2>Visualization via Dependency Graphs for various projects</h2>
         </div>
 
         <div class="content">
-            <h2 class="content-subhead">Page Under Construction</h2>
-            <p>
+          <h2 class="content-subhead"></h2>
+          <p>
             You will be able to choose the project and see it's dependencies or you can see the entire information as a whole in a single network
-            </p>
+          </p>
 
 <!--             <div id="config"></div>
- -->            
-                <div id="network-popUp">
-                  <span id="operation">node</span> <br>
-                  <table style="margin:auto;"><tr>
-                    <td>id</td><td><input id="node-id" value="new value" /></td>
+-->            
+          <div id="network-popUp">
+                <span id="operation">node</span> <br>
+                <table style="margin:auto;">
+                  <tr>
+                    <td>id</td>
+                    <td><input id="node-id" value="new value" /></td>
                   </tr>
-                    <tr>
-                      <td>label</td><td><input id="node-label" value="new value" /></td>
-                    </tr></table>
-                  <input type="button" value="save" id="saveButton" />
-                  <input type="button" value="cancel" id="cancelButton" />
-                </div>
-                <div id="mynetwork" style="width: 100%"></div>
-            
+                  <tr>
+                    <td>label</td><td><input id="node-label" value="new value" /></td>
+                  </tr>
+                </table>
+                <input type="button" value="save" id="saveButton" />
+                <input type="button" value="cancel" id="cancelButton" />
+          </div>
+          <div id="mynetwork" style="width: 100%"></div>
+        
+        </div>
+      </div>
+
+      <div class="singleElementDisplay" id="version_skew" style="display:none">
+        <div class="header">
+          <h1>Version Skew</h1>
+          <h2>Version Skew Present in the Lithium Project</h2>
         </div>
 
-<!--         <?php
-            if($page==="version_skew_report" || $page==="database"){
-                include($page_locs[$page]);
-            } else {
-                include($page_locs["intro"]);
-            }
-        ?>
- -->    </div>
+        <div class="content">
+          <h2 class="content-subhead"></h2>
+          <p>
+            Find the Version Skew in the project here. You'll be able to find the projects which are dependent on different versions of the same module here
+          </p>
+
+<!--             <div id="config"></div>
+-->            
+
+          <table id="version_skew_table" class="pure-table-bordered" border="1" style="width:100%">
+<!--               <thead>
+                  <tr>
+                      <th>#</th>
+                      <th>Module Name</th>
+                      <th>Project</th>
+                      <th>Version</th>
+                  </tr>
+              </thead>
+
+ -->              <tbody>
+                  <tr>
+                      <td>#</td>
+                      <td>Module Name</td>
+                      <td>Project</td>
+                      <td>Version</td>
+                  </tr>
+              </tbody>
+          </table>          
+        
+        </div>
+      </div>
+
+    </div>
+
 </div>
 
-<script type="text/javascript" src="./js/data.json"></script>
-
 <script src="js/ui.js"></script>
-<script src="js/jquery.js"></script>
-<script src="js/process.php"></script>
+
+<script type="text/javascript">
+
+function uniqueVersions(list) {
+  var result = [];
+  $.each(list, function(i, e) {
+    if ($.inArray(e, result) == -1) result.push(e);
+  });
+  return result;
+}
+
+var modulesVersionInfo = {}
+
+$.each(modulesMappedToProjects, function(module, moduleDependencyInfo) {
+
+    var projectVersion = {}
+    $.each(moduleDependencyInfo, function(projectName, versionInfo) {
+        var Versions = []
+        for (var i = versionInfo.length - 1; i >= 0; i--) {
+          Versions.push(versionInfo[i][0]);
+        };
+        Versions = uniqueVersions( Versions );
+        if( Versions.length===1 );
+        else {
+          projectVersion[projectName] = Versions;
+        }
+    });
+
+    // console.log(projectVersion);
+    // console.log(Object.keys(projectVersion).length);
+
+    if(Object.keys(projectVersion).length>0){
+      modulesVersionInfo[module] = projectVersion;
+    }
+
+});
+
+console.log(modulesVersionInfo);
+
+var version_skew_info = {
+  "test" : {
+    "project1" : [["ver1"], ["ver2"]],
+    "project2" : [["ver1"], ["ver2"], ["ver3"], ["ver4"]],
+    "project3" : [["ver1"], ["ver2"], ["ver5"], ["ver6"]],
+    "project4" : [["ver1"], ["ver2"]],
+  },
+
+  "test2" : {
+    "project1" : [["ver1"], ["ver2"]],
+    "project2" : [["ver1"], ["ver2"], ["ver3"], ["ver4"]],
+    "project3" : [["ver1"], ["ver2"], ["ver5"], ["ver6"]],
+    "project4" : [["ver7"], ["ver8"]],
+  },
+
+  "test3" : {
+    "project1" : [["ver1"], ["ver2"]],
+    "project2" : [["ver1"], ["ver2"], ["ver3"], ["ver4"]],
+    "project6" : [["ver1"], ["ver2"]],
+    "project7" : [["ver1"], ["ver2"], ["ver3"], ["ver4"]],
+  },
+};
+
+
+
+
+var tableString = "";
+
+var num = 1;
+
+$.each(modulesVersionInfo, function(module, moduleDependencyInfo) {
+
+    var rowsToSpan = 0;
+
+    $.each(moduleDependencyInfo, function(projectName, versionInfo) {
+        rowsToSpan += versionInfo.length;
+    });
+
+    tableString = "<tr>";
+    tableString += "<td rowspan=\"" + rowsToSpan + "\">" + num + "</td>";
+    tableString += "<td rowspan=\"" + rowsToSpan + "\">" + module + "</td>";
+    num++;
+
+    var once = 1;
+    $.each(moduleDependencyInfo, function(projectName, versionInfo) {
+
+        if (once===1) {
+          AllProjects = "<td rowspan=\""+ versionInfo.length +"\">" + projectName + "</td>";
+        } else{
+          AllProjects = "<tr><td rowspan=\""+ versionInfo.length +"\">" + projectName + "</td>";          
+        }
+        tableString += AllProjects;
+        for (var i = versionInfo.length - 1; i >= 0; i--) {
+          //detailed version info
+//          for (var j = versionInfo[i].length - 1; j >= 0; j--) {
+            console.log(versionInfo[i]);
+            if(i==versionInfo.length-1 && once===1){
+              AllVersions = "<td>" + versionInfo[i] + "</td>";
+              AllVersions += "</tr>";//ending the very first row
+              once=0;
+            } else if (i==versionInfo.length-1){
+              AllVersions = "<td>" + versionInfo[i] + "</td></tr>";              
+            } else {
+              AllVersions = "<tr><td>" + versionInfo[i] + "</td></tr>";              
+            }
+            tableString += AllVersions;
+//          };
+        };
+
+    });
+
+
+    // tableString += "</tr>";
+    $('#version_skew_table > tbody:last-child').append(tableString);
+
+});
+
+
+</script>
+
 
 <script type="text/javascript">
 
@@ -270,6 +417,28 @@ $( document ).ready(function() {
 });
 
 </script>
+
+<script type="text/javascript">
+
+  var curDivType = window.location.hash.substr(1);
+
+  $(".singleElementDisplay").css({'display' : 'none'});
+
+  if(curDivType==="" && curDivType){
+    curDivType = "dependency"
+  }
+
+  $("#"+curDivType).css({'display' : 'block'});
+
+  function changeDiv ( changeDivTo ){
+    // alert(changeDivTo + " " + curDivType);
+    $("#"+curDivType).css({'display': 'none'});
+    $("#"+changeDivTo).css({'display': 'block'});
+    curDivType = changeDivTo;
+  }
+
+</script>
+
 
 
 </body>
