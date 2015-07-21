@@ -19,7 +19,7 @@
 <!--<![endif]-->
 
 
-<script type="text/javascript" src="./js/data.json"></script>
+<script type="text/javascript" src="./js/data1.json"></script>
 
 <script src="js/jquery.js"></script>
   
