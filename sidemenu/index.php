@@ -168,6 +168,7 @@ h4 {
                       <td>Module Name</td>
                       <td>Project</td>
                       <td>Version</td>
+                      <td>Path</td>
                   </tr>
               </tbody>
           </table>          
@@ -185,12 +186,17 @@ h4 {
 
 $( document ).ready(function() {
 
-  function uniqueVersions(list) {
+  function differentVersions(list) {
     var result = [];
     $.each(list, function(i, e) {
       if ($.inArray(e, result) == -1) result.push(e);
     });
-    return result;
+    if(result.length>1){
+      return 1;
+    }
+    else {
+      return 0;
+    }
   }
 
   var modulesVersionInfo = {}
@@ -200,13 +206,16 @@ $( document ).ready(function() {
       var projectVersion = {}
       $.each(moduleDependencyInfo, function(projectName, versionInfo) {
           var Versions = []
+          var Paths = []
           for (var i = versionInfo.length - 1; i >= 0; i--) {
             Versions.push(versionInfo[i][0]);
+            Paths.push(versionInfo[i][1]);
           };
-          Versions = uniqueVersions( Versions );
-          if( Versions.length===1 );
-          else {
-            projectVersion[projectName] = Versions;
+          var differentFlag = differentVersions( Versions );
+          if( differentFlag===1 ){
+            projectVersion[projectName] = {};
+            projectVersion[projectName]['versions'] = Versions;
+            projectVersion[projectName]['paths'] = Paths;
           }
       });
 
@@ -256,7 +265,7 @@ $( document ).ready(function() {
       var rowsToSpan = 0;
 
       $.each(moduleDependencyInfo, function(projectName, versionInfo) {
-          rowsToSpan += versionInfo.length;
+          rowsToSpan += versionInfo['versions'].length;
       });
 
       tableString = "<tr>";
@@ -268,23 +277,30 @@ $( document ).ready(function() {
       $.each(moduleDependencyInfo, function(projectName, versionInfo) {
 
           if (once===1) {
-            AllProjects = "<td rowspan=\""+ versionInfo.length +"\">" + projectName + "</td>";
+            AllProjects = "<td rowspan=\""+ versionInfo['versions'].length +"\">" + projectName + "</td>";
           } else{
-            AllProjects = "<tr><td rowspan=\""+ versionInfo.length +"\">" + projectName + "</td>";          
+            AllProjects = "<tr><td rowspan=\""+ versionInfo['versions'].length +"\">" + projectName + "</td>";          
           }
           tableString += AllProjects;
-          for (var i = versionInfo.length - 1; i >= 0; i--) {
+
+          for (var i = versionInfo['versions'].length - 1; i >= 0; i--) {
             //detailed version info
   //          for (var j = versionInfo[i].length - 1; j >= 0; j--) {
-              console.log(versionInfo[i]);
-              if(i==versionInfo.length-1 && once===1){
-                AllVersions = "<td>" + versionInfo[i] + "</td>";
+              console.log(versionInfo['versions'][i]);
+              if(i==versionInfo['versions'].length-1 && once===1){
+                AllVersions = "<td>" + versionInfo['versions'][i] + "</td>";
+                AllVersions += "<td>" + versionInfo['paths'][i] + "</td>";
                 AllVersions += "</tr>";//ending the very first row
                 once=0;
-              } else if (i==versionInfo.length-1){
-                AllVersions = "<td>" + versionInfo[i] + "</td></tr>";              
+              } else if (i==versionInfo['versions'].length-1){
+                AllVersions = "<td>" + versionInfo['versions'][i] + "</td>";              
+                AllVersions += "<td>" + versionInfo['paths'][i] + "</td>";
+                AllVersions += "</tr>";              
               } else {
-                AllVersions = "<tr><td>" + versionInfo[i] + "</td></tr>";              
+                AllVersions = "<tr>";
+                AllVersions += "<td>" + versionInfo['versions'][i] + "</td>"
+                AllVersions += "<td>" + versionInfo['paths'][i] + "</td>"
+                AllVersions += "</tr>";              
               }
               tableString += AllVersions;
   //          };
