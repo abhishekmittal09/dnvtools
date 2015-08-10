@@ -9,7 +9,6 @@
 
 
 <link rel="stylesheet" href="css/pure-min.css">
-
   
 <!--[if lte IE 8]>
     <link rel="stylesheet" href="css/layouts/side-menu-old-ie.css">
@@ -18,13 +17,16 @@
     <link rel="stylesheet" href="css/layouts/side-menu.css">
 <!--<![endif]-->
 
-
 <script type="text/javascript" src="./js/data1.json"></script>
 
 <script src="js/jquery.js"></script>
   
 <script type="text/javascript" src="./dist/vis.js"></script>
 <link href="./dist/vis.css" rel="stylesheet" type="text/css" />
+
+<link title="timeline-styles" rel="stylesheet" href="./css/timeline.css">
+<script src="./js/timelinejs.js"></script>
+
 
 <style type="text/css">
 
@@ -99,6 +101,7 @@ h4 {
             <ul class="pure-menu-list">
                 <li class="pure-menu-item"><a href="#dependency" class="pure-menu-link" onclick="changeDiv('dependency')">Dependency<br>Graph</a></li>
                 <li class="pure-menu-item"><a href="#version_skew" class="pure-menu-link" onclick="changeDiv('version_skew')">Version Skew</a></li>
+                <li class="pure-menu-item"><a href="#time_line" class="pure-menu-link" onclick="changeDiv('time_line')">Time Line</a></li>
             </ul>
         </div>
     </div>
@@ -137,6 +140,7 @@ h4 {
         </div>
       </div>
 
+      <!-- Second Menu Item -->
       <div class="singleElementDisplay" id="version_skew" style="display:none">
         <div class="header">
           <h1>Version Skew</h1>
@@ -153,16 +157,7 @@ h4 {
 -->            
 
           <table id="version_skew_table" class="pure-table-bordered" border="1" style="width:100%">
-<!--               <thead>
-                  <tr>
-                      <th>#</th>
-                      <th>Module Name</th>
-                      <th>Project</th>
-                      <th>Version</th>
-                  </tr>
-              </thead>
-
- -->              <tbody>
+              <tbody>
                   <tr>
                       <td>#</td>
                       <td>Module Name</td>
@@ -176,6 +171,24 @@ h4 {
         </div>
       </div>
 
+      <!-- Third Menu Item -->
+      <div class="singleElementDisplay" id="time_line" style="display:none">
+        <div class="header">
+          <h1>Time Line</h1>
+          <h2>Time Line of Changes in Various Versions</h2>
+        </div>
+
+        <div class="content">
+          <h2 class="content-subhead"></h2>
+
+<!--             <div id="config"></div>
+-->            
+        
+        </div>
+        
+        <div id='timeline-embed' style="width: 100%; height: 600px"></div>
+      </div>
+
     </div>
 
 </div>
@@ -185,6 +198,12 @@ h4 {
 <script type="text/javascript">
 
 $( document ).ready(function() {
+
+  // var timeline_json = make_the_json("timeline-embed", timeline_info); // you write this part
+  // two arguments: the id of the Timeline container (no '#')
+  // and the JSON object or an instance of VCO.TimelineConfig created from 
+  // a suitable JSON object
+  window.timeline = new VCO.Timeline('timeline-embed', "./js/timeline.js");
 
   function differentVersions(list) {
     var result = [];
