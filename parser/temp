@@ -1,0 +1,1839 @@
+27
+48
+105
+110
+223
+380
+391
+430
+436
+454
+464
+487
+512
+520
+530
+541
+546
+555
+599
+634
+649
+671
+689
+693
+698
+712
+719
+727
+760
+766
+771
+779
+806
+831
+925
+925
+
+	ovsdb
+		['', '1.4.0-SNAPSHOT', '1.6.0-SNAPSHOT', '0.8.0-SNAPSHOT', '0.4.0-SNAPSHOT']
+	snmp4sdn
+		['', '0.3.0-SNAPSHOT', '1.6.0-SNAPSHOT']
+	ttp
+		['', '1.6.0-SNAPSHOT', '0.2.0-SNAPSHOT']
+	sdninterfaceapp
+		['', '1.6.0-SNAPSHOT', '0.5.0-SNAPSHOT']
+	openflowplugin
+		['', '1.6.0-SNAPSHOT', '0.2.0-SNAPSHOT', '0.4.0-SNAPSHOT']
+	lacp
+		['', '1.6.0-SNAPSHOT', '1.1.0-SNAPSHOT']
+	capwap
+		['', '1.6.0-SNAPSHOT', '0.8.0-SNAPSHOT', '0.4.0-SNAPSHOT']
+	vpnservice
+		['', '1.6.0-SNAPSHOT', '0.8.0-SNAPSHOT', '0.2.0-SNAPSHOT', '0.4.0-SNAPSHOT']
+	bgpcep
+		['', '1.6.0-SNAPSHOT', '0.5.0-SNAPSHOT']
+	vtn
+		['', '1.6.0-SNAPSHOT', '1.1.0-SNAPSHOT', '0.4.0-SNAPSHOT']
+	dlux
+		['', '0.3.0-SNAPSHOT']
+	usc
+		['', '1.6.0-SNAPSHOT', '0.8.0-SNAPSHOT', '0.4.0-SNAPSHOT']
+	coretutorials
+		['', '0.1.0-SNAPSHOT', '1.6.0-SNAPSHOT', '0.8.0-SNAPSHOT', '0.4.0-SNAPSHOT']
+	snmp
+		['', '1.0-SNAPSHOT', '1.6.0-SNAPSHOT', '1.1.0-SNAPSHOT']
+	integration
+		['', '1.2.0-SNAPSHOT', '0.4.0-SNAPSHOT']
+	tcpmd5
+		['', '1.6.0-SNAPSHOT', '1.2.0-SNAPSHOT']
+	odlparent
+		['', '1.6.0-SNAPSHOT']
+	docs
+		['', '0.2.0-SNAPSHOT']
+	persistence
+		['', '1.6.0-SNAPSHOT', '1.1.0-SNAPSHOT']
+	groupbasedpolicy
+		['', '0.3.0-SNAPSHOT', '1.6.0-SNAPSHOT']
+	l2switch
+		['', '0.3.0-SNAPSHOT', '1.6.0-SNAPSHOT']
+	nic
+		['', '1.6.0-SNAPSHOT', '0.8.0-SNAPSHOT', '0.4.0-SNAPSHOT']
+	topoprocessing
+		['', '0.1.0-SNAPSHOT']
+	openflowjava
+		['', '1.6.0-SNAPSHOT', '0.7.0-SNAPSHOT']
+	tsdr
+		['', '1.1.0-SNAPSHOT']
+	yangtools
+		['', '1.6.0-SNAPSHOT', '0.8.0-SNAPSHOT', '@project.parent.version@']
+	controller
+		['', '0.8.0-SNAPSHOT', '1.2.0-SNAPSHOT', '0.4.0-SNAPSHOT', '0.3.0-SNAPSHOT', '0.2.0-SNAPSHOT', '1.3.0-SNAPSHOT', '1.6.0-SNAPSHOT']
+	iotdm
+		['', '1.6.0-SNAPSHOT', '0.8.0-SNAPSHOT', '0.4.0-SNAPSHOT']
+	sfc
+		['', '0.2.0-SNAPSHOT']
+	alto
+		['', '1.6.0-SNAPSHOT', '0.2.0-SNAPSHOT', '0.4.0-SNAPSHOT']
+	sxp
+		['', '1.2.0-SNAPSHOT']
+	aaa
+		['', '0.3.0-SNAPSHOT', '0.8.0-SNAPSHOT', '1.6.0-SNAPSHOT']
+	didm
+		['', '1.6.0-SNAPSHOT', '0.8.0-SNAPSHOT', '0.4.0-SNAPSHOT']
+	neutron
+		['', '0.6.0-SNAPSHOT', '1.6.0-SNAPSHOT', '0.8.0-SNAPSHOT', '0.4.0-SNAPSHOT']
+	snbi
+		['', '1.2.0-SNAPSHOT']
+org.postgresql
+	vtn
+		['${vtn.postgresql.jdbc.version}']
+ch.qos.logback
+	ovsdb
+		['']
+	snmp4sdn
+		['${logback.version}']
+	coretutorials
+		['']
+	sdninterfaceapp
+		['']
+	yangtools
+		['']
+	openflowplugin
+		['']
+	controller
+		['']
+	bgpcep
+		['']
+	vtn
+		['']
+	sfc
+		['${logback.version}']
+	tcpmd5
+		['']
+com.fasterxml.jackson.core
+	alto
+		['']
+	groupbasedpolicy
+		['']
+	aaa
+		['']
+	snmp4sdn
+		['${jackson.version}']
+	ovsdb
+		['']
+	sdninterfaceapp
+		['']
+	vtn
+		['']
+	controller
+		['']
+	sfc
+		['${jackson.version}']
+org.opendaylight.l2switch.packethandler
+	l2switch
+		['${project.version}']
+eclipselink
+	ovsdb
+		['']
+	snmp4sdn
+		['2.0.4.v201112161009', '1.5.0.v200906010428']
+	vtn
+		['']
+org.springframework.osgi
+	ovsdb
+		['1.2.1']
+javax.servlet
+	dlux
+		['${javax.servlet-api.version}']
+	aaa
+		['']
+	integration
+		['${jstl.version}', '${servlet.version}']
+	sfc
+		['2.5']
+org.opendaylight.l2switch.main
+	l2switch
+		['${project.version}']
+org.opendaylight.openflowplugin.legacy
+	vtn
+		['']
+	integration
+		['${feature.openflowplugin.version}']
+	openflowplugin
+		['']
+org.opendaylight.l2switch.arphandler
+	l2switch
+		['${project.version}']
+org.eclipse.swt
+	sxp
+		['']
+org.json
+	iotdm
+		['']
+	controller
+		['']
+	aaa
+		['']
+	sfc
+		['${org.json.version}']
+	vtn
+		['20140107', '${vtn.json.version}']
+org.opendaylight.aaa
+	usc
+		['${feature.aaa.version}']
+	dlux
+		['${feature.aaa.version}']
+	aaa
+		['', '0.3.0-SNAPSHOT', '${project.version}']
+	integration
+		['0.3.0-SNAPSHOT']
+	neutron
+		['${aaa.version}']
+junit
+	ovsdb
+		['']
+	snmp4sdn
+		['4.8.1', '4.11']
+	ttp
+		['']
+	sdninterfaceapp
+		['']
+	openflowplugin
+		['']
+	lacp
+		['']
+	capwap
+		['']
+	vpnservice
+		['']
+	bgpcep
+		['']
+	vtn
+		['', '${junit.version}']
+	dlux
+		['']
+	usc
+		['']
+	coretutorials
+		['']
+	snmp
+		['']
+	integration
+		['${junit.version}']
+	tcpmd5
+		['']
+	odlparent
+		['']
+	persistence
+		['${junit.version}']
+	groupbasedpolicy
+		['']
+	l2switch
+		['']
+	nic
+		['']
+	topoprocessing
+		['']
+	openflowjava
+		['']
+	tsdr
+		['', '${junit.version}']
+	yangtools
+		['']
+	controller
+		['', '4.11']
+	iotdm
+		['']
+	sfc
+		['', '${junit.version}', '[4.8.1, 4.11]']
+	alto
+		['', '3.8.1']
+	sxp
+		['']
+	aaa
+		['']
+	didm
+		['']
+	neutron
+		['']
+	snbi
+		['']
+org.opendaylight.l2switch
+	alto
+		['${l2switch.version}']
+	dlux
+		['${feature.l2switch.version}']
+	usc
+		['${feature.l2switch.version}']
+	integration
+		['0.3.0-SNAPSHOT']
+	tsdr
+		['${l2switch.version}']
+	l2switch
+		['', '${project.version}']
+javax.ws.rs
+	yangtools
+		['']
+joda-time
+	iotdm
+		['${joda.version}', '2.7']
+com.fasterxml.uuid
+	sfc
+		['3.1.3']
+org.opendaylight.yangtools.thirdparty
+	controller
+		['']
+	openflowplugin
+		['']
+	yangtools
+		['']
+	bgpcep
+		['']
+org.opendaylight.alto
+	alto
+		['', '${project.version}']
+org.opendaylight.groupbasedpolicy
+	groupbasedpolicy
+		['', '${groupbasedpolicy.project.version}', '${project.version}', '${dlux.version}']
+	nic
+		['${gbp.version}', '0.3.0-SNAPSHOT', '${groupbasedpolicy.version}']
+	integration
+		['${feature.groupbasedpolicy.version}']
+org.hamcrest
+	sxp
+		['']
+	vtn
+		['${hamcrest.version}']
+	sdninterfaceapp
+		['']
+	bgpcep
+		['']
+geminiweb
+	ovsdb
+		['']
+	snmp4sdn
+		['${virgo.version}', '${geminiweb.version}']
+	vtn
+		['']
+org.opendaylight.bgpcep
+	sdninterfaceapp
+		['']
+	integration
+		['${feature.bgpcep.version}']
+	bgpcep
+		['']
+commons-net
+	ovsdb
+		['']
+	snmp4sdn
+		['3.3']
+	neutron
+		['']
+	vtn
+		['', '${vtn.commons.net.version}']
+org.apache.felix
+	groupbasedpolicy
+		['${apache.felix.osgi.compendium.version}']
+	ovsdb
+		['', '0.10.0', '0.12.1', '0.14.0']
+	dlux
+		['${apache.felix.osgi.compendium.version}']
+	aaa
+		['']
+	snmp4sdn
+		['3.1.0', '3.1.6', '3.0.1']
+	vtn
+		['']
+	controller
+		['1.6.0']
+	neutron
+		['']
+org.opendaylight.usc
+	integration
+		['${feature.usc.version}']
+org.hibernate
+	tsdr
+		['${hibernate.validator.version}', '${hibernate.entity.manager.version}']
+	persistence
+		['${hibernate.version}']
+equinoxSDK381
+	ovsdb
+		['', '1.0.400.v20120522-2049', '3.8.1.v20120830-144521', '1.4.0.v20120522-1841', '1.0.0.v20120522-1841', '0.8.0.v201110170705', '3.0.0.v201112011016', '1.3.0.v20120522-1813', '2.2.0.v201112011158', '3.3.100.v20120522-1822', '1.0.400.v20120522-1841', '0.8.0.v201108120515']
+	tsdr
+		['', '${equinox.osgi.version}']
+	snmp4sdn
+		['1.0.400.v20120522-2049', '3.8.1.v20120830-144521', '2.2.0.v201112011158', '1.0.0.v20120522-1841', '0.8.0.v201110170705', '3.0.0.v201112011016', '1.3.0.v20120522-1813', '1.4.0.v20120522-1841', '3.3.100.v20120522-1822', '1.0.400.v20120522-1841', '0.8.0.v201108120515']
+	coretutorials
+		['']
+	integration
+		['3.8.1.v20120830-144521']
+	openflowplugin
+		['']
+	yangtools
+		['']
+	controller
+		['', '3.8.1.v20120830-144521']
+	bgpcep
+		['']
+	snbi
+		['3.8.1.v20120830-144521']
+	vtn
+		['']
+com.h2database
+	aaa
+		['']
+	tsdr
+		['${h2.store.version}']
+org.opendaylight.snmp4sdn
+	snmp4sdn
+		['', '1.6.0-SNAPSHOT', '${project.version}', '0.3.0-SNAPSHOT']
+org.opendaylight.odlparent
+	ovsdb
+		['']
+	snmp4sdn
+		['', '${feature.test.version}']
+	ttp
+		['${feature.test.version}']
+	sdninterfaceapp
+		['']
+	openflowplugin
+		['', '1.6.0-SNAPSHOT']
+	lacp
+		['', '1.6.0-SNAPSHOT']
+	capwap
+		['', '1.6.0-SNAPSHOT']
+	vpnservice
+		['']
+	bgpcep
+		['']
+	vtn
+		['']
+	dlux
+		['${feature.test.version}']
+	usc
+		['']
+	coretutorials
+		['', '1.6.0-SNAPSHOT']
+	snmp
+		['', '${features.test.version}']
+	integration
+		['1.6.0-SNAPSHOT']
+	tcpmd5
+		['']
+	odlparent
+		['', '1.6.0-SNAPSHOT']
+	persistence
+		['', '${feature.test.version}']
+	groupbasedpolicy
+		['', '1.6.0-SNAPSHOT']
+	l2switch
+		['', '1.6.0-SNAPSHOT']
+	nic
+		['', '${feature.test.version}']
+	topoprocessing
+		['']
+	openflowjava
+		['']
+	tsdr
+		['${features.test.version}']
+	yangtools
+		['']
+	controller
+		['', '${feature.test.version}']
+	iotdm
+		['']
+	sfc
+		['${feature.test.version}']
+	sxp
+		['1.6.0-SNAPSHOT']
+	aaa
+		['', '${features.test.version}']
+	didm
+		['']
+	neutron
+		['']
+	snbi
+		['${feature.test.version}']
+org.codehaus.enunciate
+	alto
+		['']
+	ovsdb
+		['']
+	sdninterfaceapp
+		['']
+	neutron
+		['']
+	vtn
+		['']
+org.opendaylight.didm.hp3800
+	didm
+		['${project.version}']
+com.typesafe
+	controller
+		['${typesafe.config.version}']
+org.springframework
+	ovsdb
+		['']
+	vtn
+		['']
+	integration
+		['${spring.version}']
+	snmp4sdn
+		['${spring-security.version}', '${spring.version}']
+org.eclipse.xtend
+	yangtools
+		['']
+commons-fileupload
+	ovsdb
+		['']
+	snmp4sdn
+		['1.2.2']
+	vtn
+		['']
+commons-lang
+	ovsdb
+		['2.3']
+	controller
+		['']
+	sfc
+		['${commons.lang.version}']
+	yangtools
+		['']
+	openflowplugin
+		['']
+org.opendaylight.sdninterfaceapp
+	sdninterfaceapp
+		['', '1.6.0-SNAPSHOT', '0.7.0-SNAPSHOT']
+	integration
+		['1.6.0-SNAPSHOT']
+org.apache.sshd
+	controller
+		['']
+net.sf.ehcache
+	aaa
+		['']
+org.opendaylight.integration
+	integration
+		['', '${project.version}']
+com.puppycrawl.tools
+	yangtools
+		['6.1.1']
+org.glassfish.jersey.test-framework.providers
+	controller
+		['']
+org.opendaylight.dlux
+	groupbasedpolicy
+		['${dlux.version}']
+	dlux
+		['', '${common.sigmatopology.resources.version}', '${common.login.resources.version}', '${common.navigation.resources.version}', '${project.parent.version}', '${common.yangutils.resources.version}', '${graph.resources.version}', '${common.general.resources.version}', '${common.authentication.resources.version}', '${project.version}', '${yangui.resources.version}', '${yangvisualizer.resources.version}', '${node.resources.version}', '${loader.resources.version}', '${common.topbar.resources.version}', '${topology.resources.version}', '${common.layout.resources.version}', '${core.resources.version}']
+	usc
+		['${feature.dlux.version}', '${dlux.version}']
+	coretutorials
+		['${dlux.version}']
+	integration
+		['${feature.dlux.version}']
+	openflowplugin
+		['${dlux.version}']
+	lacp
+		['${dlux.version}']
+	l2switch
+		['${dlux.version}']
+	snbi
+		['0.3.0-SNAPSHOT']
+	iotdm
+		['${dlux.version}']
+	sfc
+		['0.3.0-SNAPSHOT']
+pl.pragmatists
+	sfc
+		['1.0.3']
+org.jscience
+	persistence
+		['${jscience.version}']
+com.ning
+	controller
+		['1.9.24']
+org.apache.maven.plugin-tools
+	snmp
+		['3.2']
+	yangtools
+		['3.2']
+org.hibernate.javax.persistence
+	tsdr
+		['${hibernate.jpa.api.version}']
+com.codahale.metrics
+	controller
+		['']
+org.osgi
+	alto
+		['']
+	groupbasedpolicy
+		['']
+	dlux
+		['']
+	aaa
+		['']
+	odlparent
+		['']
+	coretutorials
+		['']
+	sdninterfaceapp
+		['']
+	topoprocessing
+		['']
+	openflowjava
+		['']
+	openflowplugin
+		['']
+	controller
+		['', '5.0.0']
+	ovsdb
+		['']
+	persistence
+		['']
+	l2switch
+		['']
+	bgpcep
+		['']
+	snbi
+		['']
+	vtn
+		['']
+	sfc
+		['', '${osgi.core.version}']
+	neutron
+		['']
+org.javassist
+	controller
+		['']
+	yangtools
+		['']
+	openflowplugin
+		['']
+org.openjdk.jmh
+	controller
+		['']
+	yangtools
+		['${jmh.version}']
+org.opendaylight.l2switch.addresstracker
+	alto
+		['${l2switch.version}']
+	l2switch
+		['0.3.0-SNAPSHOT', '${project.version}']
+org.codehaus.jackson
+	integration
+		['${jackson.version}']
+org.apache.karaf.shell
+	alto
+		['2.2.11', '${karaf.shell.version}']
+	ovsdb
+		['${karaf.version}']
+	snmp4sdn
+		['${karaf.shell.version}']
+	nic
+		['${karaf.version}']
+	tsdr
+		['${karaf.shell.command.version}', ' ${karaf.shell.command.version}']
+	openflowplugin
+		['${karaf.version}']
+	controller
+		['${karaf.version}']
+	snbi
+		['${karaf.shell.version}']
+org.fusesource.leveldbjni
+	controller
+		['${leveldbjni.version}']
+org.apache.geronimo.specs
+	aaa
+		['']
+net.sourceforge.argparse4j
+	controller
+		['0.4.3']
+	yangtools
+		['0.4.3']
+org.opendaylight.tsdr
+	integration
+		['1.1.0-SNAPSHOT']
+	tsdr
+		['', '${project.version}', '${tsdr.project.version}']
+com.jcraft
+	snmp4sdn
+		['1.0.7', '0.1.50']
+org.eclipse.jetty.aggregate
+	iotdm
+		['8.1.15.v20140411']
+org.bouncycastle
+	snbi
+		['', '1.50']
+	controller
+		['']
+	usc
+		['']
+org.opendaylight.l2switch.loopremover
+	l2switch
+		['${project.version}']
+org.ops4j.pax.url
+	ovsdb
+		['']
+	controller
+		['']
+	vtn
+		['']
+	odlparent
+		['']
+	bgpcep
+		['']
+org.openexi
+	controller
+		['']
+	openflowplugin
+		['']
+	coretutorials
+		['']
+com.github.romix
+	yangtools
+		['']
+	openflowplugin
+		['']
+org.ops4j.pax.web
+	iotdm
+		['${pax.web.version}']
+com.google.code.findbugs
+	sdninterfaceapp
+		['']
+	yangtools
+		['']
+	controller
+		['']
+	bgpcep
+		['']
+	tcpmd5
+		['']
+	persistence
+		['${jsr305.api.version}']
+org.opendaylight.openflowjava
+	openflowjava
+		['']
+	openflowplugin
+		['', '${openflowjava.version}']
+org.apache.maven
+	controller
+		['', '${maven.plugin.api.version}']
+	snmp
+		['2.0']
+	yangtools
+		['', '2.0']
+org.opendaylight.topoprocessing
+	topoprocessing
+		['', '${project.version}']
+	integration
+		['${feature.topoprocessing.version}']
+org.jboss.resteasy
+	controller
+		['']
+	ttp
+		['']
+	aaa
+		['']
+org.sonatype.plexus
+	yangtools
+		['']
+org.opendaylight.neutron
+	groupbasedpolicy
+		['${neutron.version}']
+	ovsdb
+		['${networkconfig.neutron.version}']
+	integration
+		['${feature.neutron.version}']
+	neutron
+		['', '${project.version}']
+	vtn
+		['']
+org.aopalliance
+	ovsdb
+		['']
+	snmp4sdn
+		['1.0.0']
+	vtn
+		['']
+org.opendaylight.ttp
+	ttp
+		['', '${project.version}']
+	integration
+		['${feature.ttp.version}']
+com.fasterxml.jackson.datatype
+	controller
+		['']
+	aaa
+		['']
+	sfc
+		['${jackson.version}']
+org.apache.httpcomponents
+	alto
+		['']
+	ovsdb
+		['4.2.1']
+	aaa
+		['${httpclient.version}']
+org.eclipse.jdt
+	controller
+		['']
+com.google.protobuf
+	controller
+		['${protobuf.version}', '2.5.0']
+	tsdr
+		['${protobuf.version}']
+org.opendaylight.lacp.main
+	lacp
+		['${project.version}']
+org.xerial
+	sdninterfaceapp
+		['3.7.2']
+javax.inject
+	ovsdb
+		['1']
+	controller
+		['1']
+	odlparent
+		['1']
+org.opendaylight.sxp
+	sxp
+		['', '${project.version}']
+org.opendaylight.controller.archetypes
+	controller
+		['']
+jline
+	controller
+		['2.11']
+org.opendaylight.toaster
+	coretutorials
+		['']
+org.opendaylight.docs
+	docs
+		['']
+org.opendaylight.snbi
+	snbi
+		['', '${project.version}', '1.2.0-SNAPSHOT']
+${project.groupId}.mininet
+	didm
+		['${mininet.version}']
+org.springframework.security
+	ovsdb
+		['']
+	snmp4sdn
+		['${spring-security.version}']
+	vtn
+		['']
+org.jboss.spec.javax.transaction
+	ovsdb
+		['']
+	sdninterfaceapp
+		['1.0.1.Final']
+	snmp4sdn
+		['1.0.1.Final']
+	vtn
+		['']
+org.jolokia
+	controller
+		['${jolokia.version}']
+org.opendaylight.openflowplugin
+	groupbasedpolicy
+		['', '${openflowplugin.version}']
+	ovsdb
+		['${openflowplugin.version}', '', '${openflowjava-nicira.version}']
+	dlux
+		['${feature.openflowplugin.version}']
+	didm
+		['${ofplugin.version}']
+	sdninterfaceapp
+		['0.2.0-SNAPSHOT']
+	integration
+		['${feature.openflowplugin.version}']
+	openflowplugin
+		['']
+	lacp
+		['${openflow.plugin.version}']
+	vpnservice
+		['${openflowplugin.version}']
+	l2switch
+		['']
+	vtn
+		['']
+	sfc
+		['${openflowplugin.version}', '${feature.openflowplugin.version}']
+org.hsqldb
+	persistence
+		['${hsqldb.version}']
+org.opendaylight.controller.thirdparty
+	alto
+		['', '2.0.1']
+	ovsdb
+		['${jersey-servlet.version}', '${corsfilter.version}']
+	snmp4sdn
+		['1.0.2']
+	vtn
+		['']
+	l2switch
+		['']
+	neutron
+		['']
+org.glassfish.jersey.ext
+	yangtools
+		['']
+org.ow2.asm
+	ovsdb
+		['${asm.version}']
+	snmp4sdn
+		['4.1']
+	vtn
+		['']
+org.slf4j
+	ovsdb
+		['']
+	snmp4sdn
+		['${slf4j.version}', '1.7.2']
+	sdninterfaceapp
+		['']
+	openflowplugin
+		['']
+	bgpcep
+		['']
+	dlux
+		['']
+	usc
+		['']
+	snmp
+		['${slf4j.version}']
+	yangtools
+		['']
+	vtn
+		['']
+	l2switch
+		['']
+	persistence
+		['${slf4j.version}']
+	groupbasedpolicy
+		['']
+	nic
+		['']
+	sfc
+		['${slf4j.version}']
+	topoprocessing
+		['']
+	openflowjava
+		['', '${slf4j.version}']
+	controller
+		['']
+	tcpmd5
+		['']
+	alto
+		['']
+	aaa
+		['']
+	neutron
+		['']
+	snbi
+		['']
+xml-apis
+	yangtools
+		['']
+org.eclipse.jetty
+	aaa
+		['']
+org.antlr
+	yangtools
+		['4.0']
+xmlunit
+	controller
+		['']
+	yangtools
+		['', '1.5']
+org.mockito
+	ovsdb
+		['']
+	sdninterfaceapp
+		['']
+	openflowplugin
+		['']
+	sxp
+		['']
+	vpnservice
+		['']
+	bgpcep
+		['']
+	vtn
+		['']
+	coretutorials
+		['']
+	snmp
+		['']
+	yangtools
+		['']
+	tcpmd5
+		['']
+	l2switch
+		['']
+	groupbasedpolicy
+		['']
+	nic
+		['']
+	topoprocessing
+		['']
+	openflowjava
+		['']
+	tsdr
+		['', '${mockito.version}']
+	controller
+		['']
+	iotdm
+		['']
+	sfc
+		['${mockito.version}']
+	alto
+		['']
+	lacp
+		['']
+	aaa
+		['']
+	didm
+		['']
+org.opendaylight.lacp
+	lacp
+		['', '${project.version}']
+	integration
+		['${feature.lacp.version}']
+com.google.code.gson
+	ovsdb
+		['']
+	snmp4sdn
+		['2.1']
+	ttp
+		['']
+	yangtools
+		['']
+	vtn
+		['', '2.3.1', '${vtn.gson.version}']
+	controller
+		['']
+	sfc
+		['${gson.version}']
+org.opendaylight.packetcable
+	integration
+		['${feature.packetcable.version}']
+org.opendaylight.sfc
+	groupbasedpolicy
+		['${sfc.version}']
+	ovsdb
+		['']
+	integration
+		['0.2.0-SNAPSHOT']
+	sfc
+		['', '${project.parent.version}', '${project.version}']
+org.sonatype.sisu
+	sfc
+		['0.9.9']
+com.lmax
+	controller
+		['']
+org.ow2.chameleon.management
+	ovsdb
+		['']
+	snmp4sdn
+		['1.0.0']
+	vtn
+		['']
+org.opendaylight.vpnservice
+	vpnservice
+		['', '${model.bgp.version}', '${vpnservices.version}', '${vpns.mdsalutil.version}']
+	integration
+		['${feature.vpnservice.version}']
+org.codehaus.plexus
+	snmp
+		['3.0.8']
+	yangtools
+		['1.5.6']
+org.apache.hadoop
+	tsdr
+		['${hadoop.version}']
+com.fasterxml.jackson.jaxrs
+	ovsdb
+		['']
+	aaa
+		['']
+	snmp4sdn
+		['${jackson.version}']
+	sdninterfaceapp
+		['']
+	vtn
+		['']
+	controller
+		['']
+	sfc
+		['${jackson.version}']
+taglibs
+	integration
+		['${jstl.version}']
+com.google.code.jscep
+	snbi
+		['2.0.1']
+org.opendaylight.controller.samples
+	controller
+		['', '${mdsal.version}', '${project.version}']
+org.opendaylight.didm
+	didm
+		['', '${didm.version}']
+	integration
+		['${didm.version}']
+net.sourceforge.pmd
+	controller
+		['']
+org.glassfish
+	aaa
+		['', '${glassfish.json.version}']
+	sfc
+		['1.0.4']
+org.skyscreamer
+	ttp
+		['']
+${project.groupId}
+	ovsdb
+		['', '${project.version}', '1.2.0-SNAPSHOT']
+	sdninterfaceapp
+		['', '0.5.0-SNAPSHOT']
+	openflowplugin
+		['']
+	sxp
+		['']
+	capwap
+		['', '${project.version}']
+	vpnservice
+		['', '${fibmanager.version}', '${idmanager.version}', '2013.07.15.8-SNAPSHOT', '${model.bgp.version}', '${vpnservices.version}', '${mdsalutil.version}', '${project.version}', '${nexthopmgr.version}', '${vpnmanager.version}', '${interfacemgr.version}']
+	bgpcep
+		['', '${project.version}']
+	usc
+		['${project.version}', '1.1.0-SNAPSHOT']
+	coretutorials
+		['', '${project.version}']
+	snmp
+		['${project.version}']
+	yangtools
+		['', '${project.version}', '${yangtools.version}']
+	sfc
+		['${project.version}']
+	neutron
+		['${project.version}']
+	groupbasedpolicy
+		['']
+	nic
+		['${project.version}']
+	topoprocessing
+		['${project.version}']
+	openflowjava
+		['']
+	controller
+		['', '${netconf.version}', '${project.version}']
+	iotdm
+		['', '${project.version}']
+	tcpmd5
+		['']
+	alto
+		['${project.version}']
+	didm
+		['', '${project.version}']
+com.typesafe.akka
+	controller
+		['', '${akka.version}']
+	usc
+		['${akka.version}']
+org.opendaylight.ovsdb
+	groupbasedpolicy
+		['', '${ovsdb.southbound.version}']
+	ovsdb
+		['', '${openstack.netvirt.providers.version}', '${schema.openvswitch.version}', '${plugin.shell.version}', '1.2.0-SNAPSHOT', '${ovsdb.utils.mdsal.openflow.version}', '${ovsdb.library.version}', '${ovsdb.plugin.version}', '${ovsdb.utils.config.version}', '${schema.hardwarevtep.version}', '${ovsdb.plugin.compatibility.layer.version}', '${project.version}', '${openstack.netvirt.version}', '${ovsdb.utils.servicehelper.version}']
+	vtn
+		['']
+	integration
+		['${feature.ovsdb.version}']
+	sfc
+		['${ovsdb.southbound.version}']
+args4j
+	controller
+		['2.0.29']
+org.opendaylight.alto.alto-hosttracker
+	alto
+		['', '${project.version}']
+org.apache.maven.surefire
+	ovsdb
+		['${maven.surefire.version}']
+io.netty
+	groupbasedpolicy
+		['${netty.version}']
+	ovsdb
+		['${netty.version}', '', '${io.netty.version}']
+	usc
+		['']
+	sdninterfaceapp
+		['']
+	openflowjava
+		['']
+	controller
+		['', '3.8.0.Final']
+	openflowplugin
+		['']
+	sxp
+		['', '${netty.version}']
+	yangtools
+		['']
+	capwap
+		['4.0.25.Final']
+	bgpcep
+		['']
+	vtn
+		['']
+	tcpmd5
+		['']
+org.apache.tomcat.extras
+	vtn
+		['${vtn.tomcat.version}']
+org.opendaylight.openflowplugin.applications
+	vtn
+		['']
+	openflowplugin
+		['']
+org.opendaylight.capwap
+	integration
+		['${feature.capwap.version}']
+org.eclipse.persistence
+	controller
+		['']
+	neutron
+		['', '2.5.2']
+org.eclipse
+	controller
+		['']
+org.opendaylight.persistence
+	persistence
+		['', '${project.version}']
+org.apache.thrift
+	vpnservice
+		['0.9.1']
+org.opendaylight.reservation
+	integration
+		['${feature.reservation.version}']
+${groupId}
+	capwap
+		['${project.version}']
+org.opendaylight.coretutorials
+	integration
+		['${feature.coretutorials.version}']
+org.apache.maven.shared
+	yangtools
+		['']
+org.apache.karaf.features
+	ovsdb
+		['', '${karaf.version}']
+	snmp4sdn
+		['${karaf.version}']
+	ttp
+		['']
+	sdninterfaceapp
+		['${karaf.version}']
+	openflowplugin
+		['${karaf.version}']
+	sxp
+		['${karaf.version}']
+	capwap
+		['']
+	vpnservice
+		['']
+	dlux
+		['${karaf.version}']
+	usc
+		['']
+	coretutorials
+		['', '${karaf.version}']
+	integration
+		['${karaf.version}']
+	vtn
+		['']
+	odlparent
+		['${karaf.version}']
+	neutron
+		['']
+	groupbasedpolicy
+		['']
+	l2switch
+		['${karaf.version}']
+	nic
+		['']
+	topoprocessing
+		['${karaf.version}']
+	controller
+		['', '${karaf.version}']
+	iotdm
+		['']
+	sfc
+		['${karaf.version}']
+	alto
+		['', '${karaf.version}']
+	lacp
+		['${karaf.version}']
+	aaa
+		['${karaf.version}']
+	didm
+		['']
+	snbi
+		['${karaf.version}']
+com.google.collections
+	controller
+		['1.0']
+org.opendaylight.lispflowmapping
+	integration
+		['${feature.lispflowmapping.version}']
+	sfc
+		['1.3.0-SNAPSHOT', '${lispflowmapping.version}']
+net.sourceforge.tcljava
+	snmp4sdn
+		['1.4.1']
+org.uncommons.maths
+	controller
+		['${uncommons.maths.version}']
+virgomirror
+	ovsdb
+		['']
+	snmp4sdn
+		['3.8.0.I20120518-2145']
+	vtn
+		['']
+org.apache.oltu.oauth2
+	aaa
+		['']
+org.ops4j.pax.exam
+	groupbasedpolicy
+		['']
+	ovsdb
+		['']
+	coretutorials
+		['${exam.version}']
+	yangtools
+		['']
+	openflowplugin
+		['', '${exam.version}']
+	controller
+		['', '${exam.version}']
+	odlparent
+		['']
+	bgpcep
+		['', '${exam.version}']
+	vtn
+		['', '${exam.version}']
+org.opendaylight.nic
+	nic
+		['${project.version}', '${intent.version}']
+	integration
+		['${feature.nic.version}']
+org.apache.karaf.tooling
+	odlparent
+		['${karaf.version}']
+org.eclipse.californium
+	iotdm
+		['${californium.version}', '1.0.0-M1']
+org.opendaylight.iotdm
+	iotdm
+		['0.0.2-SNAPSHOT', '${onem2m.version}']
+org.iq80.leveldb
+	controller
+		['${leveldb.version}']
+org.apache.hbase
+	tsdr
+		['${hbase.version}']
+org.opendaylight.tcpmd5
+	sxp
+		['', '${tcpmd5.version}']
+	sdninterfaceapp
+		['']
+	integration
+		['${feature.tcpmd5.version}']
+	tcpmd5
+		['']
+	bgpcep
+		['']
+org.ops4j.pax.swissbox
+	sfc
+		['1.8.0']
+org.opendaylight.l2switch.hosttracker
+	alto
+		['${l2switch.version}']
+	l2switch
+		['', '${project.version}']
+org.opendaylight.yangtools.model
+	ovsdb
+		['']
+	ttp
+		['2013.09.07.7-SNAPSHOT']
+	sdninterfaceapp
+		['']
+	openflowplugin
+		['']
+	sxp
+		['']
+	vpnservice
+		['${ietf.interfaces.version}', '${ietf.inet.types.version}', '${ietf.yang.types.version}', '${iana.if.type.version}', '${yang.ext.version}']
+	bgpcep
+		['']
+	coretutorials
+		['']
+	snmp
+		['${ietf-yang-types.version}', '${ietf-inet-types.version}']
+	integration
+		['${yang-ext.version}', '${ietf-yang-types.version}', '${ietf-inet-types.version}']
+	vtn
+		['']
+	l2switch
+		['', '2013.10.21.7-SNAPSHOT']
+	neutron
+		['']
+	groupbasedpolicy
+		['']
+	nic
+		['']
+	topoprocessing
+		['', '${ietf.model.version}']
+	openflowjava
+		['']
+	tsdr
+		['${ietf-yang-types.version}', '${ietf-inet-types.version}']
+	yangtools
+		['']
+	controller
+		['', '${yang-ext.version}', '${ietf-yang-types.version}', '${ietf-inet-types.version}']
+	sfc
+		['${ietf.model.version}', '${ietf.yang.types.version}']
+	alto
+		['', '${ietf.topology.version}']
+	lacp
+		['2010.09.24.7-SNAPSHOT']
+	aaa
+		['']
+org.yaml
+	ovsdb
+		['']
+org.codehaus.sonar-plugins.java
+	groupbasedpolicy
+		['${sonar-jacoco-listeners.version}']
+	ovsdb
+		['${sonar-jacoco-listeners.version}']
+	coretutorials
+		['']
+	yangtools
+		['${sonar-jacoco-listeners.version}']
+	openflowplugin
+		['${sonar-jacoco-listeners.version}']
+	controller
+		['${sonar-jacoco-listeners.version}']
+	vtn
+		['${sonar-jacoco-listeners.version}']
+	tcpmd5
+		['${sonar-jacoco-listeners.version}']
+com.fasterxml.jackson.module
+	ovsdb
+		['']
+	aaa
+		['']
+	snmp4sdn
+		['${jackson.version}']
+	vtn
+		['']
+	controller
+		['']
+	sfc
+		['${jackson.version}']
+log4j
+	vtn
+		['${vtn.log4j.version}']
+commons-codec
+	ovsdb
+		['']
+	aaa
+		['']
+	sdninterfaceapp
+		['']
+	vtn
+		['${vtn.commons.codec.version}']
+	bgpcep
+		['']
+	openflowplugin
+		['']
+org.opendaylight.snmp
+	didm
+		['${snmp.version}']
+	snmp
+		['', '${project.version}']
+	integration
+		['${snmp.plugin.version}']
+com.google.guava
+	alto
+		['']
+	groupbasedpolicy
+		['']
+	dlux
+		['']
+	aaa
+		['']
+	ovsdb
+		['']
+	nic
+		['']
+	sdninterfaceapp
+		['']
+	openflowjava
+		['']
+	controller
+		['']
+	openflowplugin
+		['']
+	yangtools
+		['']
+	capwap
+		['']
+	bgpcep
+		['']
+	snbi
+		['']
+	usc
+		['']
+	vtn
+		['']
+	tcpmd5
+		['']
+	persistence
+		['${guava.version}']
+${symbol_dollar}{project.groupId}
+	controller
+		['', '${symbol_dollar}{project.version}']
+org.opendaylight.yangtools
+	ovsdb
+		['']
+	snmp4sdn
+		['${yangtools.version}']
+	ttp
+		['${yangtools.version}']
+	sdninterfaceapp
+		['']
+	openflowplugin
+		['', '${yangtools.version}']
+	lacp
+		['']
+	capwap
+		['', '${yangtools.version}']
+	vpnservice
+		['', '${yangtools.version}']
+	bgpcep
+		['']
+	vtn
+		['']
+	usc
+		['']
+	coretutorials
+		['', '${yangtools.version}']
+	snmp
+		['${yangtools.version}']
+	integration
+		['${yangtools.version}']
+	tcpmd5
+		['']
+	l2switch
+		['']
+	persistence
+		['${yangtools.version}']
+	groupbasedpolicy
+		['']
+	nic
+		['', '${yangtools.version}']
+	topoprocessing
+		['', '${yangtools.version}']
+	openflowjava
+		['']
+	tsdr
+		['${yangtools.version}']
+	yangtools
+		['', '0.6.1', '${project.version}']
+	controller
+		['', '0.8.0-SNAPSHOT', '${yangtools.version}', '${yang.codegen.version}']
+	iotdm
+		['', '${yangtools.version}']
+	sfc
+		['${yangtools.version}']
+	alto
+		['${yangtools.version}']
+	sxp
+		['', '${yangtools.feature.version}']
+	aaa
+		['', '${yangtools.version}']
+	didm
+		['']
+	neutron
+		['']
+	snbi
+		['']
+${project.groupId}.alto-hosttracker
+	alto
+		['${project.version}']
+org.apache.servicemix.bundles
+	snmp
+		['${apache.servicemix.version}']
+	snmp4sdn
+		['2.0.8_6']
+org.glassfish.jersey.core
+	yangtools
+		['']
+org.opendaylight.vtn
+	nic
+		['${feature.vtn-manager.version}', '0.4.0-SNAPSHOT']
+	integration
+		['${feature.vtn-manager.version}', '6.1.0.0-SNAPSHOT']
+	vtn
+		['', '${project.version}']
+org.powermock
+	ovsdb
+		['', '1.5.4', '${powermock.version}']
+	vpnservice
+		['1.5.2']
+	sfc
+		['${powermock.version}']
+org.apache.tomcat
+	vtn
+		['${vtn.tomcat.version}']
+commons-collections
+	ovsdb
+		['', '1.0']
+com.sun.jersey.jersey-test-framework
+	aaa
+		['']
+org.apache.logging.log4j.adapters
+	snmp4sdn
+		['2.0-beta2']
+org.eclipse.equinox
+	sxp
+		['1.1.0.v20120522-1841']
+	controller
+		['']
+org.opendaylight.openflowplugin.model
+	ovsdb
+		['${openflowplugin.version}', '']
+	didm
+		['${ofplugin.version}']
+	topoprocessing
+		['${openflowplugin.version}']
+	tsdr
+		['${model.flow.statistics}']
+	openflowplugin
+		['']
+	lacp
+		['']
+	vpnservice
+		['${openflowplugin.version}']
+	l2switch
+		['']
+	vtn
+		['']
+	sfc
+		['${feature.openflowplugin.version}']
+org.opendaylight.controller.model
+	alto
+		['${mdsal.version}']
+	ovsdb
+		['']
+	ttp
+		['${controller.version}']
+	aaa
+		['${mdsal.version}']
+	coretutorials
+		['${mdsal.version}']
+	didm
+		['', '${mdsal.version}']
+	topoprocessing
+		['${mdsal.version}']
+	tsdr
+		['${mdsal.version}']
+	openflowplugin
+		['', '${mdsal.version}']
+	lacp
+		['']
+	controller
+		['']
+	vpnservice
+		['${mdsal.version}']
+	l2switch
+		['']
+	vtn
+		['']
+	sfc
+		['${mdsal.version}']
+javax.portlet
+	ovsdb
+		['2.0']
+org.easymock
+	persistence
+		['${easymock.version}']
+orbit
+	ovsdb
+		['']
+	controller
+		['']
+	sdninterfaceapp
+		['7.0.53.v201406060720', '7.0.53.v201406070630', '7.0.53.v201406061610']
+	snmp4sdn
+		['7.0.32.v201211081135', '3.1.1.v201204261316', '1.2.0.v201210211230', '1.4.1.v201108011116', '1.1.0.v201005080400', '1.1.0.v201211130549', '1.2.0.v201105211821', '7.0.32.v201211201336', '7.0.32.v201211201952', '1.1.0.v201209060031', '2.2.0.v201108011116']
+	vtn
+		['']
+org.codehaus.jettison
+	ovsdb
+		['']
+	vtn
+		['']
+	usc
+		['']
+	sfc
+		['${jettison.version}']
+	snmp4sdn
+		['1.3.3']
+org.opendaylight.vtn.application
+	vtn
+		['']
+com.sun.jersey
+	ovsdb
+		['']
+	aaa
+		['']
+	snmp4sdn
+		['${jersey.version}']
+	sdninterfaceapp
+		['']
+	yangtools
+		['']
+	vtn
+		['1.9.1', '']
+	controller
+		['']
+	sfc
+		['${jersey.client.version}', '${jersey.version}']
+	neutron
+		['']
+org.opendaylight.controller
+	ovsdb
+		['', '${commons.httpclient.version}', '${statisticsmanager.implementation.version}', '${configuration.implementation.version}', '${northbound.commons.version}', '${configuration.version}', '${forwarding.staticrouting}', '${switchmanager.implementation.version}', '${usermanager.implementation.version}', '${connectionmanager.version}', '${clustering.services.version}', '${subnets.northbound.version}', '${statistics.northbound.version}', '${logging.bridge.version}', '${clustering.services_implementation.version}', '${hosttracker.implementation.version}', '${bundlescanner.version}', '${topology.northbound.version}', '${forwarding.staticrouting.northbound.version}', '${security.version}', '${hosttracker.api.version}', '${forwardingrulesmanager.implementation.version}', '${sal.implementation.version}', '${usermanager.version}', '${hosttracker.northbound.version}', '${bundlescanner.implementation.version}', '${dummy-console.version}', '${topologymanager.version}', '${containermanager.it.version}', '${flowprogrammer.northbound.version}', '${forwardingrulesmanager.version}', '${sal.version}', '${arphandler.version}', '${protocol_plugins.stub.version}', '${routing.dijkstra_implementation.version}', '${switchmanager.api.version}', '${statisticsmanager.version}', '${switchmanager.northbound.version}']
+	snmp4sdn
+		['${nsf.version}', '${karaf.empty.version}', '${sal.version}', '${karaf.resources.version}', '${branding.version}', '0.7.0', '${mdsal.version}']
+	ttp
+		['', '${karaf.empty.version}', '${controller.version}']
+	sdninterfaceapp
+		['', '0.9.0-SNAPSHOT', '${odl.karaf.base.version}', '${karaf.empty.version}', '${sal.version}', '${karaf.resources.version}', '0.6.0-SNAPSHOT', '${branding.version}', '0.7.0-SNAPSHOT']
+	openflowplugin
+		['', '0.9.0-SNAPSHOT', '${karaf.distro.empty.version}', '0.10.0-SNAPSHOT', '${sal.version}', '${sal.api.version}', '${karaf.resources.version}', '${branding.version}', '${mdsal.version}', '0.7.0-SNAPSHOT']
+	lacp
+		['', '0.4.0-SNAPSHOT', '${branding.version}', '${karaf.resources.version}', '1.6.0-SNAPSHOT', '${mdsal.version}']
+	capwap
+		['', '${mdsal.version}']
+	vpnservice
+		['', '${mdsal.version}']
+	bgpcep
+		['', '${controller.config.version}', '${protocol-framework.version}']
+	vtn
+		['']
+	dlux
+		['${feature.adsal.version}', '${feature.mdsal.version}', '${karaf.empty.version}', '${branding.version}', '${commons.opendaylight.version}', '${karaf.resources.version}', '${feature.nsf.version}', '${mdsal.version}']
+	usc
+		['', '${feature.nsf.version}', '${mdsal.version}', '${feature.adsal.version}', '${feature.mdsal.version}']
+	coretutorials
+		['', '0.4.0-SNAPSHOT', '${karaf.empty.version}', '${branding.version}', '${karaf.resources.version}', '1.3.0-SNAPSHOT', '${mdsal.version}']
+	snmp
+		['${karaf.empty.version}', '${config.version}', '${mdsal.version}']
+	integration
+		['', '${version}', '${feature.adsal.version}', '${feature.mdsal.version}', '${branding.version}', '${karaf.resources.version}', '${feature.nsf.version}', '${config.version}', '1.6.0-SNAPSHOT', '${mdsal.version}']
+	tcpmd5
+		['']
+	l2switch
+		['', '${karaf.resources.version}', '1.6.0-SNAPSHOT', '${branding.version}']
+	persistence
+		['${karaf.empty.version}']
+	groupbasedpolicy
+		['', '0.6.0-SNAPSHOT', '1.6.0-SNAPSHOT', '${karaf.empty.version}']
+	nic
+		['', '${config.version}', '${mdsal.version}']
+	topoprocessing
+		['${karaf.resources.version}', '', '${mdsal.version}', '${karaf.empty.version}', '${branding.version}']
+	openflowjava
+		['', '${mdsal.version}']
+	tsdr
+		['${sal.binding.config}', '${config.version}', '${mdsal.version}', '${sal.core.api}', '${karaf.distro.empty.version}']
+	controller
+		['', '${netconf.version}', '${karaf.empty.version}', '${branding.version}', '${commons.opendaylight.version}', '${karaf.resources.version}', '${project.version}', '${config.version}', '1.3.0-SNAPSHOT', '1.6.0-SNAPSHOT', '${mdsal.version}']
+	iotdm
+		['', '${mdsal.version}']
+	sfc
+		['${karaf.empty.version}', '${karaf.resources.version}', '${mdsal.version}', '${branding.version}', '${config.version}']
+	alto
+		['', '${controller.commons.northbound.version}', '${odl.version}', '0.10.0-SNAPSHOT', '${sal.version}', '${config.version}', '${mdsal.version}']
+	sxp
+		['${karaf.empty.version}', '${karaf.resources.version}', '${mdsal.version}', '${branding.version}', '']
+	aaa
+		['', '${netconf.version}', '${karaf.empty.version}', '${karaf.branding.version}', '${karaf.resources.version}', '${mdsal.version}']
+	didm
+		['']
+	neutron
+		['']
+	snbi
+		['', '${nsf.version}', '${karaf.empty.version}', '${branding.version}', '${karaf.resources.version}', '1.6.0-SNAPSHOT', '${mdsal.version}']
+org.apache.commons
+	ovsdb
+		['', '${commons.lang3.version}']
+	snmp4sdn
+		['']
+	yangtools
+		['']
+	vtn
+		['']
+	controller
+		['']
+	openflowplugin
+		['']
+	iotdm
+		['1.3.2']
+org.scala-lang
+	controller
+		['', '${scala.version}.${scala.micro.version}']
+commons-io
+	ovsdb
+		['']
+	snmp4sdn
+		['2.4']
+	yangtools
+		['']
+	vtn
+		['']
+	controller
+		['']
+	odlparent
+		['']

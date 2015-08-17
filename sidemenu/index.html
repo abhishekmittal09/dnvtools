@@ -24,9 +24,9 @@
 <script type="text/javascript" src="./dist/vis.js"></script>
 <link href="./dist/vis.css" rel="stylesheet" type="text/css" />
 
-<link title="timeline-styles" rel="stylesheet" href="./css/timeline.css">
-<script src="./js/timelinejs.js"></script>
-
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
 <style type="text/css">
 
@@ -99,9 +99,9 @@ h4 {
             <a class="pure-menu-heading" href="#">Tools</a>
 
             <ul class="pure-menu-list">
-                <li class="pure-menu-item"><a href="#dependency" class="pure-menu-link" onclick="changeDiv('dependency')">Dependency<br>Graph</a></li>
-                <li class="pure-menu-item"><a href="#version_skew" class="pure-menu-link" onclick="changeDiv('version_skew')">Version Skew</a></li>
-                <li class="pure-menu-item"><a href="#time_line" class="pure-menu-link" onclick="changeDiv('time_line')">Time Line</a></li>
+                <li class="pure-menu-item"><a href="#dependency" class="pure-menu-link" onclick="window.location.reload(true);">Dependency<br>Graph</a></li>
+                <li class="pure-menu-item"><a href="#version_skew" class="pure-menu-link" onclick="window.location.reload(true);">Version Skew</a></li>
+                <li class="pure-menu-item"><a href="#time_line" class="pure-menu-link" onclick="window.location.reload(true);">Time Line</a></li>
             </ul>
         </div>
     </div>
@@ -156,7 +156,7 @@ h4 {
 <!--             <div id="config"></div>
 -->            
 
-          <table id="version_skew_table" class="pure-table-bordered" border="1" style="width:100%">
+          <table id="version_skew_table" class="pure-table-bordered"  style="width:100%">
               <tbody>
                   <tr>
                       <td>#</td>
@@ -186,7 +186,8 @@ h4 {
         
         </div>
         
-        <div id='timeline-embed' style="width: 100%; height: 600px"></div>
+        <div id='timeline-embed' style="width: 100%; height: 6px"></div>
+        <div id='slider' style="width: 100%; height: 6px"></div>
       </div>
 
     </div>
@@ -199,11 +200,9 @@ h4 {
 
 $( document ).ready(function() {
 
-  // var timeline_json = make_the_json("timeline-embed", timeline_info); // you write this part
-  // two arguments: the id of the Timeline container (no '#')
-  // and the JSON object or an instance of VCO.TimelineConfig created from 
-  // a suitable JSON object
-  window.timeline = new VCO.Timeline('timeline-embed', "./js/timeline.js");
+  $(function() {
+    $( "#slider" ).slider();
+  });
 
   function differentVersions(list) {
     var result = [];
@@ -249,35 +248,22 @@ $( document ).ready(function() {
 
   console.log(modulesVersionInfo);
 
-  var version_skew_info = {
-    "test" : {
-      "project1" : [["ver1"], ["ver2"]],
-      "project2" : [["ver1"], ["ver2"], ["ver3"], ["ver4"]],
-      "project3" : [["ver1"], ["ver2"], ["ver5"], ["ver6"]],
-      "project4" : [["ver1"], ["ver2"]],
-    },
-
-    "test2" : {
-      "project1" : [["ver1"], ["ver2"]],
-      "project2" : [["ver1"], ["ver2"], ["ver3"], ["ver4"]],
-      "project3" : [["ver1"], ["ver2"], ["ver5"], ["ver6"]],
-      "project4" : [["ver7"], ["ver8"]],
-    },
-
-    "test3" : {
-      "project1" : [["ver1"], ["ver2"]],
-      "project2" : [["ver1"], ["ver2"], ["ver3"], ["ver4"]],
-      "project6" : [["ver1"], ["ver2"]],
-      "project7" : [["ver1"], ["ver2"], ["ver3"], ["ver4"]],
-    },
-  };
-
-
-
-
   var tableString = "";
 
   var num = 1;
+
+  function groupInfo(versionInfo){
+    var groupingInfo = {}
+    for (var i = versionInfo['versions'].length - 1; i >= 0; i--) {
+      if(groupingInfo[versionInfo['versions'][i]] !== undefined){
+        groupingInfo[versionInfo['versions'][i]].push(versionInfo['paths'][i]);
+      } else{
+        groupingInfo[versionInfo['versions'][i]] = []
+        groupingInfo[versionInfo['versions'][i]].push(versionInfo['paths'][i]);
+      }
+    };
+    return groupingInfo;
+  }
 
   $.each(modulesVersionInfo, function(module, moduleDependencyInfo) {
 
@@ -292,43 +278,86 @@ $( document ).ready(function() {
       tableString += "<td rowspan=\"" + rowsToSpan + "\">" + module + "</td>";
       num++;
 
-      var once = 1;
+      var row_module = 1;
+      var row_project = 0;
       $.each(moduleDependencyInfo, function(projectName, versionInfo) {
 
-          if (once===1) {
+          if (row_module===1) {
             AllProjects = "<td rowspan=\""+ versionInfo['versions'].length +"\">" + projectName + "</td>";
           } else{
             AllProjects = "<tr><td rowspan=\""+ versionInfo['versions'].length +"\">" + projectName + "</td>";          
+            row_project = 1;
           }
           tableString += AllProjects;
 
-          for (var i = versionInfo['versions'].length - 1; i >= 0; i--) {
+          groupingInfo = groupInfo(versionInfo);
+
+          console.log(groupingInfo);
+
+  //         for (var i = versionInfo['versions'].length - 1; i >= 0; i--) {
+  //           //detailed version info
+  // //          for (var j = versionInfo[i].length - 1; j >= 0; j--) {
+  //             console.log(versionInfo['versions'][i]);
+  //             if(i==versionInfo['versions'].length-1 && once===1){
+  //               AllVersions = "<td>" + versionInfo['versions'][i] + "</td>";
+  //               AllVersions += "<td>" + versionInfo['paths'][i] + "</td>";
+  //               AllVersions += "</tr>";//ending the very first row
+  //               once=0;
+  //             } else if (i==versionInfo['versions'].length-1){
+  //               AllVersions = "<td>" + versionInfo['versions'][i] + "</td>";              
+  //               AllVersions += "<td>" + versionInfo['paths'][i] + "</td>";
+  //               AllVersions += "</tr>";              
+  //             } else {
+  //               AllVersions = "<tr>";
+  //               AllVersions += "<td>" + versionInfo['versions'][i] + "</td>"
+  //               AllVersions += "<td>" + versionInfo['paths'][i] + "</td>"
+  //               AllVersions += "</tr>";              
+  //             }
+  //             tableString += AllVersions;
+  // //          };
+  //         };
+          var row_version = 0;
+          for (var key in groupingInfo) {
+            var rowsToSpan = groupingInfo[key].length;
             //detailed version info
-  //          for (var j = versionInfo[i].length - 1; j >= 0; j--) {
-              console.log(versionInfo['versions'][i]);
-              if(i==versionInfo['versions'].length-1 && once===1){
-                AllVersions = "<td>" + versionInfo['versions'][i] + "</td>";
-                AllVersions += "<td>" + versionInfo['paths'][i] + "</td>";
-                AllVersions += "</tr>";//ending the very first row
-                once=0;
-              } else if (i==versionInfo['versions'].length-1){
-                AllVersions = "<td>" + versionInfo['versions'][i] + "</td>";              
-                AllVersions += "<td>" + versionInfo['paths'][i] + "</td>";
-                AllVersions += "</tr>";              
+              console.log(key);
+              if(row_module===1 || row_project===1){
+                AllVersions = "<td rowspan=\"" + rowsToSpan + "\">" + key + "</td>";
               } else {
                 AllVersions = "<tr>";
-                AllVersions += "<td>" + versionInfo['versions'][i] + "</td>"
-                AllVersions += "<td>" + versionInfo['paths'][i] + "</td>"
-                AllVersions += "</tr>";              
+                AllVersions += "<td rowspan=\"" + rowsToSpan + "\">" + key + "</td>";
+                row_version = 1;
               }
-              tableString += AllVersions;
-  //          };
-          };
 
+              for (var i = groupingInfo[key].length - 1; i >= 0; i--) {
+                if(row_project===1 || row_module===1 || row_version===1){
+                  AllVersions += "<td>" + groupingInfo[key][i] + "</td>";
+                  if(row_version===1){
+                    AllVersions += "</tr>";
+                    row_version = 0;
+                  }
+                  if(row_module===1){
+                    AllVersions += "</tr>";
+                    row_module = 0;
+                  }
+                  if(row_project===1){
+                    AllVersions += "</tr>";
+                    row_project = 0;
+                  }
+                } else {
+                  AllVersions += "<tr>";
+                  AllVersions += "<td>" + groupingInfo[key][i] + "</td>";
+                  AllVersions += "</tr>";
+                }
+              };
+
+              tableString += AllVersions;
+          };
       });
 
 
       // tableString += "</tr>";
+      tableString += "<tr></tr>";
       $('#version_skew_table > tbody:last-child').append(tableString);
 
   });
